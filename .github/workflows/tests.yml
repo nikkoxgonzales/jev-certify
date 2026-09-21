@@ -30,8 +30,10 @@ jobs:
       # No API key and no network: every test either simulates data or replays the
       # committed journal, and the replay path is hash-checked, so a passing run is
       # evidence the recorded results still reproduce.
+      # addopts is cleared so the runner prints the pass count and timings that the badge
+      # and the README claim, instead of a bare exit code.
       - name: Tests
-        run: pytest tests -q
+        run: python -m pytest tests -o addopts="" -q --durations=6
 
       - name: Re-analyse the committed run (must not call the API)
         run: python -m experiments.analyse
