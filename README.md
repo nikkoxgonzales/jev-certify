@@ -243,7 +243,7 @@ you which.
 ## Quickstart
 
 ```bash
-pip install -e .                        # stdlib only -- no numpy, no SDK, urllib is the whole HTTP stack
+pip install -e ".[dev]"               # stdlib-only at runtime; [dev] adds just pytest
 cp .env.example .env                    # put OPENROUTER_API_KEY in it
 
 # 1. Analyse the shipped run. Zero API calls, zero cost, every figure regenerated:

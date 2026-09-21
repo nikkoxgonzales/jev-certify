@@ -11,6 +11,7 @@ dependencies = []
 
 [project.optional-dependencies]
 plot = ["numpy"]
+dev = ["pytest>=7", "build"]
 
 [project.scripts]
 jev-certify = "jev_certify.cli:main"
