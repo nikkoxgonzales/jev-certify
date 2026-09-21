@@ -1,0 +1,11 @@
+{
+  "api_calls": 0,
+  "journal_hits": 2410,
+  "cost_usd": 0.0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "latency_p50_s": null,
+  "latency_p95_s": null,
+  "journal_entries": 2412,
+  "journal_total_cost_usd": 0.229461
+}

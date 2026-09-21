@@ -1,0 +1,66 @@
+deployed intents: full=150 restricted=20
+planned decisions: 2410
+journal already holds 3 decisions; new calls will pay only for misses
+[full/calibration] 460 decisions
+  1/460 decisions  (1s)
+  154/460 decisions  (6s)
+  334/460 decisions  (11s)
+  460/460 decisions  (14s)
+[full/evaluation] 400 decisions
+  168/400 decisions  (19s)
+  352/400 decisions  (24s)
+  400/400 decisions  (43s)
+[full/oos_evaluation] 300 decisions
+  159/300 decisions  (48s)
+  300/300 decisions  (52s)
+[full/in_taxonomy_evaluation] 150 decisions
+Traceback (most recent call last):
+  File "C:\Users\nikko\Desktop\cc\jev-projects\jev-certify\jev_certify\client.py", line 238, in _post
+    with urllib.request.urlopen(request, timeout=self.timeout) as response:
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nikko\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 189, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nikko\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 495, in open
+    response = meth(req, response)
+  File "C:\Users\nikko\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 604, in http_response
+    response = self.parent.error(
+        'http', request, response, code, msg, hdrs)
+  File "C:\Users\nikko\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 533, in error
+    return self._call_chain(*args)
+           ~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\nikko\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\nikko\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 613, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 520: <none>
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\nikko\Desktop\cc\jev-projects\jev-certify\experiments\collect.py", line 146, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "C:\Users\nikko\Desktop\cc\jev-projects\jev-certify\experiments\collect.py", line 134, in main
+    client.decide_many(items, workers=args.workers, progress=progress)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nikko\Desktop\cc\jev-projects\jev-certify\jev_certify\client.py", line 328, in decide_many
+    future.result()
+    ~~~~~~~~~~~~~^^
+  File "C:\Users\nikko\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\_base.py", line 456, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\nikko\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\nikko\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\nikko\Desktop\cc\jev-projects\jev-certify\jev_certify\client.py", line 319, in work
+    results[index] = self.decide(state, questions)
+                     ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nikko\Desktop\cc\jev-projects\jev-certify\jev_certify\client.py", line 283, in decide
+    raw = self._post(payload)
+  File "C:\Users\nikko\Desktop\cc\jev-projects\jev-certify\jev_certify\client.py", line 248, in _post
+    raise last_error from exc
+jev_certify.client.JevError: HTTP 520 from Decisions API: {"error":{"message":"HTTP 520: error code: 520\n","code":520}}

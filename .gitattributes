@@ -1,0 +1,8 @@
+# Keep the repository LF-only so the journal, plan files and results are byte-identical
+# whoever clones them, on any platform.
+* text=auto eol=lf
+
+# The recorded run is data, not source: never let a smudge filter rewrite it.
+results/*.jsonl -text
+results/*.json -text
+*.svg -text

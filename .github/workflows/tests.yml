@@ -1,0 +1,36 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      # The package is intentionally dependency-free: the whole HTTP stack is urllib, and
+      # the statistics are hand-rolled. Installing it must therefore pull nothing in.
+      - name: Install
+        run: pip install -e .
+
+      # No API key and no network: every test either simulates data or replays the
+      # committed journal, and the replay path is hash-checked, so a passing run is
+      # evidence the recorded results still reproduce.
+      - name: Tests
+        run: pytest tests -q
+
+      - name: Re-analyse the committed run (must not call the API)
+        run: python -m experiments.analyse

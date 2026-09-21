@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jev-certify — certified abstention for Jev decisions</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: var(--app-font, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif);
+         color: var(--foreground, #16181d); margin: 0; padding: 4px 2px 24px; line-height: 1.45; }
+  h1 { font-size: 20px; margin: 0 0 2px; }
+  h2 { font-size: 14px; margin: 26px 0 8px; text-transform: uppercase; letter-spacing: .04em;
+        color: var(--muted-foreground, #666); }
+  p.sub { margin: 0 0 14px; color: var(--muted-foreground, #666); font-size: 13px; max-width: 74ch; }
+  .cards { display: flex; flex-wrap: wrap; gap: 10px; }
+  .card { border: 1px solid var(--border, #e2e4e8); border-radius: 10px; padding: 10px 13px; min-width: 148px;
+           background: var(--card, transparent); }
+  .card .label { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted-foreground, #666); }
+  .card .value { font-size: 21px; font-weight: 600; margin: 3px 0 1px; }
+  .card .note { font-size: 11px; color: var(--muted-foreground, #666); }
+  table { border-collapse: collapse; font-size: 12.5px; margin: 6px 0 4px; }
+  th, td { border-bottom: 1px solid var(--border, #e6e8ec); padding: 5px 10px 5px 0; text-align: left; }
+  th { font-size: 11px; text-transform: uppercase; letter-spacing: .03em; color: var(--muted-foreground, #666); font-weight: 600; }
+  td.ok { color: #16a34a; font-weight: 600; } td.bad { color: #dc2626; font-weight: 600; }
+  .panes { display: flex; flex-wrap: wrap; gap: 22px; }
+  .pane { flex: 1 1 320px; min-width: 300px; }
+  .rel { display: flex; align-items: flex-end; gap: 6px; height: 140px; }
+  .relcol { display: flex; align-items: flex-end; gap: 2px; height: 130px; }
+  .relbar { width: 9px; background: var(--accent, #3b82f6); border-radius: 2px 2px 0 0; opacity: .8; }
+  .relbar.conf { background: var(--muted-foreground, #999); opacity: .5; }
+  .relcol span { font-size: 9px; color: var(--muted-foreground, #666); align-self: flex-end; margin-left: -12px; }
+  .legend { font-size: 11px; color: var(--muted-foreground, #666); }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11.5px;
+          background: var(--accent, #00000010); opacity: .85; padding: 1px 4px; border-radius: 4px; }
+  .warn { border-left: 3px solid #dc2626; padding-left: 10px; font-size: 12.5px; }
+</style>
+</head>
+<body>
+  <h1>jev-certify</h1>
+  <p class="sub">Certified abstention and prediction-powered audits for <strong>Jev</strong> (TypeSafe System One)
+  on CLINC150 (Larson et al., EMNLP 2019) human test + out-of-scope splits. One Jev call per query carries a routing <code>choice</code> and a scope
+  <code>noul</code>; the numbers below are measured against human labels, not asserted.</p>
+
+  <div class="cards">
+    <div class="card"><div class="label">Certified threshold</div><div class="value" style="">0.831</div><div class="note">alpha = 5% per-query misroute budget</div></div>
+    <div class="card"><div class="label">Auto-routed</div><div class="value" style="">84.8%</div><div class="note">of 400 held-out queries</div></div>
+    <div class="card"><div class="label">Measured loss / query</div><div class="value" style="">0.0225</div><div class="note">certificate held</div></div>
+    <div class="card"><div class="label">Error when routed</div><div class="value" style="">2.6%</div><div class="note">95% UCB 4.6%</div></div>
+    <div class="card"><div class="label">Gate false-accepts</div><div class="value" style="">38.7%</div><div class="note">of human out-of-scope queries accepted</div></div>
+    <div class="card"><div class="label">Cost / 1k queries</div><div class="value" style="">$0.1455</div><div class="note">p50 0.37s · p95 0.744s</div></div>
+  </div>
+
+  <div class="panes">
+    <div class="pane">
+      <h2>Risk–coverage on held-out traffic</h2>
+      <svg viewBox="0 0 520 260" width="100%" height="260" role="img" aria-label="Error among routed queries vs. coverage">
+  <text x="52" y="16" font-size="12" fill="var(--foreground, #111)">Error among routed queries vs. coverage</text>
+  <line x1="52" y1="28" x2="52" y2="226" stroke="var(--border, #ddd)"/>
+  <line x1="52" y1="226" x2="504" y2="226" stroke="var(--border, #ddd)"/>
+  <path d="M504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L501.0,59.6 L501.0,59.6 L497.9,59.1 L497.9,59.1 L497.9,59.1 L497.9,59.1 L491.9,64.5 L491.9,64.5 L491.9,64.5 L488.8,70.3 L485.8,76.2 L482.8,82.1 L482.8,82.1 L470.6,93.2 L461.5,98.6 L455.5,104.3 L452.4,104.0 L452.4,104.0 L449.4,103.7 L449.4,103.7 L440.3,115.7 L437.3,121.9 L434.2,121.6 L431.2,121.3 L431.2,121.3 L419.1,133.4 L413.0,132.9 L410.0,132.7 L406.9,132.4 L400.9,131.9 L397.8,131.7 L397.8,131.7 L397.8,131.7 L394.8,131.4 L388.7,137.7 L385.7,137.4 L382.7,144.0 L370.5,143.1 L367.5,142.9 L358.4,142.1 L358.4,142.1 L343.2,140.9 L328.1,154.1 L319.0,160.7 L319.0,160.7 L312.9,160.3 L312.9,160.3 L306.8,167.3 L300.8,174.3 L300.8,174.3 L288.6,173.7 L282.6,180.9 L270.4,187.9 L249.2,194.9 L240.1,194.6 L234.0,194.4 L221.9,194.0 L203.7,201.5 L176.4,209.2 L146.0,208.6 L52.0,216.2" fill="none" stroke="var(--accent, #3b82f6)" stroke-width="2"/>
+  <text x="44" y="226.0" text-anchor="end" font-size="10" fill="var(--muted-foreground, #666)">0.00</text><text x="44" y="127.0" text-anchor="end" font-size="10" fill="var(--muted-foreground, #666)">0.04</text><text x="44" y="28.0" text-anchor="end" font-size="10" fill="var(--muted-foreground, #666)">0.08</text><text x="52.0" y="248" text-anchor="middle" font-size="10" fill="var(--muted-foreground, #666)">0.63</text><text x="278.0" y="248" text-anchor="middle" font-size="10" fill="var(--muted-foreground, #666)">0.81</text><text x="504.0" y="248" text-anchor="middle" font-size="10" fill="var(--muted-foreground, #666)">1.00</text>
+  <text x="504" y="248" text-anchor="end" font-size="10" fill="var(--muted-foreground, #666)">coverage</text>
+  <text x="52" y="20" font-size="10" fill="var(--muted-foreground, #666)">selective error</text>
+</svg>
+      <p class="legend">Left is conservative (fewer queries routed, fewer mistakes), right is greedy.
+      The certified threshold sits where the certified per-query budget is met.</p>
+    </div>
+    <div class="pane">
+      <h2>Scope gate: risk–coverage</h2>
+      <svg viewBox="0 0 520 260" width="100%" height="260" role="img" aria-label="Wrong accepts vs. queries accepted">
+  <text x="52" y="16" font-size="12" fill="var(--foreground, #111)">Wrong accepts vs. queries accepted</text>
+  <line x1="52" y1="28" x2="52" y2="226" stroke="var(--border, #ddd)"/>
+  <line x1="52" y1="226" x2="504" y2="226" stroke="var(--border, #ddd)"/>
+  <path d="M504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L504.0,53.8 L502.1,54.8 L484.0,64.5 L460.1,78.5 L434.3,95.0 L405.9,115.3 L393.6,125.8 L383.3,135.2 L376.1,141.2 L368.4,148.9 L363.2,153.5 L357.4,159.8 L352.3,164.7 L349.0,166.6 L347.1,168.9 L345.2,169.4 L342.6,172.4 L340.6,173.9 L338.1,176.1 L335.4,177.5 L333.6,178.1 L332.9,178.0 L329.7,182.1 L327.7,182.7 L326.4,184.4 L325.8,185.3 L323.2,186.8 L321.3,188.4 L320.6,189.3 L320.0,190.2 L320.0,190.2 L318.7,191.0 L316.1,192.6 L315.5,193.5 L314.8,194.4 L312.8,195.2 L309.6,197.8 L307.7,198.6 L305.8,200.4 L303.8,202.3 L303.8,202.3 L303.2,203.3 L301.2,204.1 L298.7,205.0 L297.4,205.9 L295.4,207.9 L295.4,207.9 L293.5,207.7 L292.2,207.6 L289.6,208.5 L288.4,208.4 L287.0,208.3 L287.0,208.3 L285.7,209.4 L283.8,210.3 L281.9,211.3 L280.6,212.4 L279.3,212.3 L277.4,212.2 L276.7,212.1 L275.4,212.1 L273.5,215.5 L270.3,217.7 L267.0,220.0 L263.8,219.9 L263.1,219.9 L261.9,219.8 L259.9,219.8 L257.3,219.7 L254.8,220.9 L254.8,220.9 L252.2,222.1 L249.6,222.1 L245.7,222.0 L243.8,221.9 L239.9,221.9 L236.7,221.8 L233.4,223.1 L232.2,223.1 L228.3,223.1 L223.8,223.0 L217.9,222.9 L210.2,222.7 L205.0,222.6 L196.6,222.4 L190.8,222.3 L177.9,223.9 L166.3,223.7 L150.8,223.4 L139.2,223.0 L123.7,222.4 L108.2,221.4 L88.2,226.0 L62.4,226.0 L52.0,226.0 L52.0,226.0" fill="none" stroke="var(--accent, #3b82f6)" stroke-width="2"/>
+  <text x="44" y="226.0" text-anchor="end" font-size="10" fill="var(--muted-foreground, #666)">0.00</text><text x="44" y="127.0" text-anchor="end" font-size="10" fill="var(--muted-foreground, #666)">0.25</text><text x="44" y="28.0" text-anchor="end" font-size="10" fill="var(--muted-foreground, #666)">0.49</text><text x="52.0" y="248" text-anchor="middle" font-size="10" fill="var(--muted-foreground, #666)">0.00</text><text x="278.0" y="248" text-anchor="middle" font-size="10" fill="var(--muted-foreground, #666)">0.50</text><text x="504.0" y="248" text-anchor="middle" font-size="10" fill="var(--muted-foreground, #666)">1.00</text>
+  <text x="504" y="248" text-anchor="end" font-size="10" fill="var(--muted-foreground, #666)">accept rate</text>
+  <text x="52" y="20" font-size="10" fill="var(--muted-foreground, #666)">wrong accept rate</text>
+</svg>
+      <p class="legend">The gate decides whether the deployed taxonomy covers a query at all;
+      out-of-scope traffic is what it exists to catch.</p>
+    </div>
+  </div>
+
+  <h2>Reliability of Jev's scope probability (calibration split)</h2>
+  <div class="rel"><div class="relcol" title="bin 0.05"><div class="relbar" style="height:0px"></div><div class="relbar conf" style="height:9px"></div><span>0.1</span></div><div class="relcol" title="bin 0.15"><div class="relbar" style="height:40px"></div><div class="relbar conf" style="height:17px"></div><span>0.1</span></div><div class="relcol" title="bin 0.25"><div class="relbar" style="height:102px"></div><div class="relbar conf" style="height:30px"></div><span>0.2</span></div><div class="relcol" title="bin 0.35"><div class="relbar" style="height:111px"></div><div class="relbar conf" style="height:40px"></div><span>0.3</span></div><div class="relcol" title="bin 0.45"><div class="relbar" style="height:112px"></div><div class="relbar conf" style="height:53px"></div><span>0.5</span></div><div class="relcol" title="bin 0.55"><div class="relbar" style="height:108px"></div><div class="relbar conf" style="height:64px"></div><span>0.6</span></div><div class="relcol" title="bin 0.65"><div class="relbar" style="height:112px"></div><div class="relbar conf" style="height:78px"></div><span>0.7</span></div><div class="relcol" title="bin 0.75"><div class="relbar" style="height:120px"></div><div class="relbar conf" style="height:90px"></div><span>0.8</span></div><div class="relcol" title="bin 0.85"><div class="relbar" style="height:119px"></div><div class="relbar conf" style="height:102px"></div><span>0.8</span></div><div class="relcol" title="bin 0.95"><div class="relbar" style="height:119px"></div><div class="relbar conf" style="height:113px"></div><span>0.9</span></div></div>
+  <p class="legend">Blue = observed frequency of "in scope" per confidence bin · grey = bin's mean confidence.
+  Bars of similar height mean the number can be trusted as a probability, which is what every guarantee here assumes.</p>
+
+  <h2>Prediction sets — how much ambiguity is left</h2>
+  <table><thead><tr><th>Score</th><th>Calibrated threshold</th><th>Coverage</th><th>Mean set size</th><th>Top-1 fallbacks</th></tr></thead>
+  <tbody><tr><td>APS</td><td>1.0000</td><td>99.8%</td><td>148.54</td><td>0</td></tr><tr><td>LAC</td><td>1.0000</td><td>100.0%</td><td>150.00</td><td>0</td></tr></tbody></table>
+
+  <h2>Prediction-powered audit — 550 decisions, few hand labels</h2>
+  <table><thead><tr><th>Hand labels</th><th>PPI++ CI width</th><th>Labels-only width</th><th>Narrower</th><th>PPI CI coverage</th><th>Label ratio</th></tr></thead>
+  <tbody><tr><td>25</td><td>0.1017</td><td>0.2696</td><td>62.3%</td><td>0.97</td><td>7.025x</td></tr><tr><td>50</td><td>0.0880</td><td>0.1931</td><td>54.4%</td><td>1.00</td><td>4.81x</td></tr><tr><td>100</td><td>0.0792</td><td>0.1397</td><td>43.3%</td><td>0.99</td><td>3.108x</td></tr><tr><td>200</td><td>0.0781</td><td>0.0992</td><td>21.3%</td><td>1.00</td><td>1.616x</td></tr></tbody></table>
+
+  <h2>Where the certificate does <em>not</em> hold</h2>
+  <table><thead><tr><th>Traffic</th><th>n</th><th>Intent accuracy</th><th>Auto-routed</th><th>Loss / query</th><th>Certificate held?</th></tr></thead>
+  <tbody><tr><td>evaluation exchangeable</td><td>400</td><td>93.0%</td><td>84.8%</td><td>0.0225</td><td class="ok">yes</td></tr><tr><td>in taxonomy exchangeable</td><td>150</td><td>95.3%</td><td>92.7%</td><td>0.0067</td><td class="ok">yes</td></tr><tr><td>out of scope traffic</td><td>300</td><td>0.0%</td><td>23.0%</td><td>0.2300</td><td class="bad">NO</td></tr></tbody></table>
+  <p class="warn">Conformal guarantees require exchangeability between calibration and production traffic.
+  The rows marked NO are the measured cost of that assumption breaking — this is the part a router's README usually omits.</p>
+</body>
+</html>

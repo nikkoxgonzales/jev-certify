@@ -1,0 +1,27 @@
+[project]
+name = "jev-certify"
+version = "0.1.0"
+description = "Certified abstention and prediction-powered audits for Jev (TypeSafe System One) decisions"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Nikko" }]
+keywords = ["jev", "typesafe", "system-one", "conformal-prediction", "prediction-powered-inference", "routing"]
+dependencies = []
+
+[project.optional-dependencies]
+plot = ["numpy"]
+
+[project.scripts]
+jev-certify = "jev_certify.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["jev_certify"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

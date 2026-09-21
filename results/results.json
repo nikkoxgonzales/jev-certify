@@ -1,0 +1,4406 @@
+{
+  "meta": {
+    "model": "typesafe/jev-1.13 (OpenRouter Decisions API)",
+    "dataset": "CLINC150 (Larson et al., EMNLP 2019) human test + out-of-scope splits",
+    "alpha": 0.05,
+    "scenario": "v1-full",
+    "deployed_intents": 150,
+    "journal_decisions": 1310
+  },
+  "cost": {
+    "decisions": 1160,
+    "cost_usd_total": 0.168776,
+    "cost_usd_per_1k": 0.1455,
+    "input_tokens_mean": 3464.2,
+    "output_tokens_mean": 1310.5,
+    "latency_p50_s": 0.37,
+    "latency_p95_s": 0.744
+  },
+  "routing": {
+    "calibration_n": 460,
+    "evaluation_n": 400,
+    "calibration_accuracy_in_scope": 0.915,
+    "calibration_accuracy_as_mixed": 0.7957,
+    "top1_accuracy": 0.93,
+    "certificates": [
+      {
+        "alpha": 0.01,
+        "feasible": false,
+        "threshold": null,
+        "certified_per_query_loss": null,
+        "calibration_per_query_loss": null,
+        "calibration_n": 460,
+        "min_attainable_bound": 0.0195,
+        "note": "two things set this floor: 1/(n+1) with n = 460 is 0.0022, and the model reports a top probability of 1.0 on 234 calibration queries, of which the wrong ones keep the loss above zero no matter how strict the threshold gets -- collect more traffic and re-check the rounding"
+      },
+      {
+        "alpha": 0.02,
+        "feasible": true,
+        "threshold": 0.971,
+        "certified_per_query_loss": 0.0195,
+        "calibration_per_query_loss": 0.0174,
+        "calibration_n": 460,
+        "min_attainable_bound": 0.0195,
+        "note": "",
+        "measured_on_holdout": {
+          "n": 400,
+          "routed": 292,
+          "routed_correct": 290,
+          "routed_wrong": 2,
+          "abstained": 108,
+          "coverage": 0.73,
+          "selective_error": 0.0068,
+          "selective_error_wilson95": [
+            0.0019,
+            0.0246
+          ],
+          "selective_error_cp_ucb95": 0.0255,
+          "per_query_risk": 0.005,
+          "per_query_risk_wilson95": [
+            0.0014,
+            0.018
+          ]
+        },
+        "certificate_held": true,
+        "coverage": 0.73
+      },
+      {
+        "alpha": 0.05,
+        "feasible": true,
+        "threshold": 0.831,
+        "certified_per_query_loss": 0.0499,
+        "calibration_per_query_loss": 0.0478,
+        "calibration_n": 460,
+        "min_attainable_bound": 0.0195,
+        "note": "",
+        "measured_on_holdout": {
+          "n": 400,
+          "routed": 339,
+          "routed_correct": 330,
+          "routed_wrong": 9,
+          "abstained": 61,
+          "coverage": 0.8475,
+          "selective_error": 0.0265,
+          "selective_error_wilson95": [
+            0.014,
+            0.0497
+          ],
+          "selective_error_cp_ucb95": 0.0459,
+          "per_query_risk": 0.0225,
+          "per_query_risk_wilson95": [
+            0.0119,
+            0.0422
+          ]
+        },
+        "certificate_held": true,
+        "coverage": 0.8475
+      },
+      {
+        "alpha": 0.1,
+        "feasible": true,
+        "threshold": 0.6566,
+        "certified_per_query_loss": 0.0998,
+        "calibration_per_query_loss": 0.0978,
+        "calibration_n": 460,
+        "min_attainable_bound": 0.0195,
+        "note": "",
+        "measured_on_holdout": {
+          "n": 400,
+          "routed": 370,
+          "routed_correct": 356,
+          "routed_wrong": 14,
+          "abstained": 30,
+          "coverage": 0.925,
+          "selective_error": 0.0378,
+          "selective_error_wilson95": [
+            0.0227,
+            0.0625
+          ],
+          "selective_error_cp_ucb95": 0.0539,
+          "per_query_risk": 0.035,
+          "per_query_risk_wilson95": [
+            0.021,
+            0.0579
+          ]
+        },
+        "certificate_held": true,
+        "coverage": 0.925
+      }
+    ],
+    "curves": {
+      "in_scope_only": [
+        {
+          "threshold": 0.0,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.01,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.02,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.03,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.04,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.05,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.06,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.07,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.08,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.09,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.1,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.11,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.12,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.13,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.14,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.15,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.16,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.17,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.18,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.19,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.2,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.21,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.22,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.23,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.24,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.25,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.26,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.27,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.28,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.29,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.3,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.31,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.32,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.33,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.34,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.35,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.36,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.37,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.38,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.39,
+          "coverage": 1.0,
+          "selective_error": 0.07,
+          "per_query_risk": 0.07
+        },
+        {
+          "threshold": 0.4,
+          "coverage": 0.9975,
+          "selective_error": 0.067669,
+          "per_query_risk": 0.0675
+        },
+        {
+          "threshold": 0.41,
+          "coverage": 0.9975,
+          "selective_error": 0.067669,
+          "per_query_risk": 0.0675
+        },
+        {
+          "threshold": 0.42,
+          "coverage": 0.995,
+          "selective_error": 0.067839,
+          "per_query_risk": 0.0675
+        },
+        {
+          "threshold": 0.43,
+          "coverage": 0.995,
+          "selective_error": 0.067839,
+          "per_query_risk": 0.0675
+        },
+        {
+          "threshold": 0.44,
+          "coverage": 0.995,
+          "selective_error": 0.067839,
+          "per_query_risk": 0.0675
+        },
+        {
+          "threshold": 0.45,
+          "coverage": 0.995,
+          "selective_error": 0.067839,
+          "per_query_risk": 0.0675
+        },
+        {
+          "threshold": 0.46,
+          "coverage": 0.99,
+          "selective_error": 0.065657,
+          "per_query_risk": 0.065
+        },
+        {
+          "threshold": 0.47,
+          "coverage": 0.99,
+          "selective_error": 0.065657,
+          "per_query_risk": 0.065
+        },
+        {
+          "threshold": 0.48,
+          "coverage": 0.99,
+          "selective_error": 0.065657,
+          "per_query_risk": 0.065
+        },
+        {
+          "threshold": 0.49,
+          "coverage": 0.9875,
+          "selective_error": 0.063291,
+          "per_query_risk": 0.0625
+        },
+        {
+          "threshold": 0.5,
+          "coverage": 0.985,
+          "selective_error": 0.060914,
+          "per_query_risk": 0.06
+        },
+        {
+          "threshold": 0.51,
+          "coverage": 0.9825,
+          "selective_error": 0.058524,
+          "per_query_risk": 0.0575
+        },
+        {
+          "threshold": 0.52,
+          "coverage": 0.9825,
+          "selective_error": 0.058524,
+          "per_query_risk": 0.0575
+        },
+        {
+          "threshold": 0.53,
+          "coverage": 0.9725,
+          "selective_error": 0.053985,
+          "per_query_risk": 0.0525
+        },
+        {
+          "threshold": 0.54,
+          "coverage": 0.965,
+          "selective_error": 0.051813,
+          "per_query_risk": 0.05
+        },
+        {
+          "threshold": 0.55,
+          "coverage": 0.96,
+          "selective_error": 0.049479,
+          "per_query_risk": 0.0475
+        },
+        {
+          "threshold": 0.56,
+          "coverage": 0.9575,
+          "selective_error": 0.049608,
+          "per_query_risk": 0.0475
+        },
+        {
+          "threshold": 0.57,
+          "coverage": 0.9575,
+          "selective_error": 0.049608,
+          "per_query_risk": 0.0475
+        },
+        {
+          "threshold": 0.58,
+          "coverage": 0.955,
+          "selective_error": 0.049738,
+          "per_query_risk": 0.0475
+        },
+        {
+          "threshold": 0.59,
+          "coverage": 0.955,
+          "selective_error": 0.049738,
+          "per_query_risk": 0.0475
+        },
+        {
+          "threshold": 0.6,
+          "coverage": 0.9475,
+          "selective_error": 0.044855,
+          "per_query_risk": 0.0425
+        },
+        {
+          "threshold": 0.61,
+          "coverage": 0.945,
+          "selective_error": 0.042328,
+          "per_query_risk": 0.04
+        },
+        {
+          "threshold": 0.62,
+          "coverage": 0.9425,
+          "selective_error": 0.04244,
+          "per_query_risk": 0.04
+        },
+        {
+          "threshold": 0.63,
+          "coverage": 0.94,
+          "selective_error": 0.042553,
+          "per_query_risk": 0.04
+        },
+        {
+          "threshold": 0.64,
+          "coverage": 0.94,
+          "selective_error": 0.042553,
+          "per_query_risk": 0.04
+        },
+        {
+          "threshold": 0.65,
+          "coverage": 0.93,
+          "selective_error": 0.037634,
+          "per_query_risk": 0.035
+        },
+        {
+          "threshold": 0.66,
+          "coverage": 0.925,
+          "selective_error": 0.037838,
+          "per_query_risk": 0.035
+        },
+        {
+          "threshold": 0.67,
+          "coverage": 0.9225,
+          "selective_error": 0.03794,
+          "per_query_risk": 0.035
+        },
+        {
+          "threshold": 0.68,
+          "coverage": 0.92,
+          "selective_error": 0.038043,
+          "per_query_risk": 0.035
+        },
+        {
+          "threshold": 0.69,
+          "coverage": 0.915,
+          "selective_error": 0.038251,
+          "per_query_risk": 0.035
+        },
+        {
+          "threshold": 0.7,
+          "coverage": 0.9125,
+          "selective_error": 0.038356,
+          "per_query_risk": 0.035
+        },
+        {
+          "threshold": 0.71,
+          "coverage": 0.9125,
+          "selective_error": 0.038356,
+          "per_query_risk": 0.035
+        },
+        {
+          "threshold": 0.72,
+          "coverage": 0.9125,
+          "selective_error": 0.038356,
+          "per_query_risk": 0.035
+        },
+        {
+          "threshold": 0.73,
+          "coverage": 0.91,
+          "selective_error": 0.038462,
+          "per_query_risk": 0.035
+        },
+        {
+          "threshold": 0.74,
+          "coverage": 0.905,
+          "selective_error": 0.035912,
+          "per_query_risk": 0.0325
+        },
+        {
+          "threshold": 0.75,
+          "coverage": 0.9025,
+          "selective_error": 0.036011,
+          "per_query_risk": 0.0325
+        },
+        {
+          "threshold": 0.76,
+          "coverage": 0.9,
+          "selective_error": 0.033333,
+          "per_query_risk": 0.03
+        },
+        {
+          "threshold": 0.77,
+          "coverage": 0.89,
+          "selective_error": 0.033708,
+          "per_query_risk": 0.03
+        },
+        {
+          "threshold": 0.78,
+          "coverage": 0.8875,
+          "selective_error": 0.033803,
+          "per_query_risk": 0.03
+        },
+        {
+          "threshold": 0.79,
+          "coverage": 0.88,
+          "selective_error": 0.034091,
+          "per_query_risk": 0.03
+        },
+        {
+          "threshold": 0.8,
+          "coverage": 0.88,
+          "selective_error": 0.034091,
+          "per_query_risk": 0.03
+        },
+        {
+          "threshold": 0.81,
+          "coverage": 0.8675,
+          "selective_error": 0.034582,
+          "per_query_risk": 0.03
+        },
+        {
+          "threshold": 0.82,
+          "coverage": 0.855,
+          "selective_error": 0.02924,
+          "per_query_risk": 0.025
+        },
+        {
+          "threshold": 0.83,
+          "coverage": 0.8475,
+          "selective_error": 0.026549,
+          "per_query_risk": 0.0225
+        },
+        {
+          "threshold": 0.84,
+          "coverage": 0.8475,
+          "selective_error": 0.026549,
+          "per_query_risk": 0.0225
+        },
+        {
+          "threshold": 0.85,
+          "coverage": 0.8425,
+          "selective_error": 0.026706,
+          "per_query_risk": 0.0225
+        },
+        {
+          "threshold": 0.86,
+          "coverage": 0.8425,
+          "selective_error": 0.026706,
+          "per_query_risk": 0.0225
+        },
+        {
+          "threshold": 0.87,
+          "coverage": 0.8375,
+          "selective_error": 0.023881,
+          "per_query_risk": 0.02
+        },
+        {
+          "threshold": 0.88,
+          "coverage": 0.8325,
+          "selective_error": 0.021021,
+          "per_query_risk": 0.0175
+        },
+        {
+          "threshold": 0.89,
+          "coverage": 0.8325,
+          "selective_error": 0.021021,
+          "per_query_risk": 0.0175
+        },
+        {
+          "threshold": 0.9,
+          "coverage": 0.8225,
+          "selective_error": 0.021277,
+          "per_query_risk": 0.0175
+        },
+        {
+          "threshold": 0.91,
+          "coverage": 0.8175,
+          "selective_error": 0.018349,
+          "per_query_risk": 0.015
+        },
+        {
+          "threshold": 0.92,
+          "coverage": 0.8075,
+          "selective_error": 0.01548,
+          "per_query_risk": 0.0125
+        },
+        {
+          "threshold": 0.93,
+          "coverage": 0.79,
+          "selective_error": 0.012658,
+          "per_query_risk": 0.01
+        },
+        {
+          "threshold": 0.94,
+          "coverage": 0.7825,
+          "selective_error": 0.01278,
+          "per_query_risk": 0.01
+        },
+        {
+          "threshold": 0.95,
+          "coverage": 0.7775,
+          "selective_error": 0.012862,
+          "per_query_risk": 0.01
+        },
+        {
+          "threshold": 0.96,
+          "coverage": 0.7675,
+          "selective_error": 0.013029,
+          "per_query_risk": 0.01
+        },
+        {
+          "threshold": 0.97,
+          "coverage": 0.7525,
+          "selective_error": 0.009967,
+          "per_query_risk": 0.0075
+        },
+        {
+          "threshold": 0.98,
+          "coverage": 0.73,
+          "selective_error": 0.006849,
+          "per_query_risk": 0.005
+        },
+        {
+          "threshold": 0.99,
+          "coverage": 0.705,
+          "selective_error": 0.007092,
+          "per_query_risk": 0.005
+        },
+        {
+          "threshold": 1.0,
+          "coverage": 0.6275,
+          "selective_error": 0.003984,
+          "per_query_risk": 0.0025
+        }
+      ],
+      "calibration": [
+        {
+          "threshold": 0.0,
+          "coverage": 1.0,
+          "selective_error": 0.204348,
+          "per_query_risk": 0.204348
+        },
+        {
+          "threshold": 0.01,
+          "coverage": 1.0,
+          "selective_error": 0.204348,
+          "per_query_risk": 0.204348
+        },
+        {
+          "threshold": 0.02,
+          "coverage": 1.0,
+          "selective_error": 0.204348,
+          "per_query_risk": 0.204348
+        },
+        {
+          "threshold": 0.03,
+          "coverage": 1.0,
+          "selective_error": 0.204348,
+          "per_query_risk": 0.204348
+        },
+        {
+          "threshold": 0.04,
+          "coverage": 1.0,
+          "selective_error": 0.204348,
+          "per_query_risk": 0.204348
+        },
+        {
+          "threshold": 0.05,
+          "coverage": 1.0,
+          "selective_error": 0.204348,
+          "per_query_risk": 0.204348
+        },
+        {
+          "threshold": 0.06,
+          "coverage": 1.0,
+          "selective_error": 0.204348,
+          "per_query_risk": 0.204348
+        },
+        {
+          "threshold": 0.07,
+          "coverage": 1.0,
+          "selective_error": 0.204348,
+          "per_query_risk": 0.204348
+        },
+        {
+          "threshold": 0.08,
+          "coverage": 1.0,
+          "selective_error": 0.204348,
+          "per_query_risk": 0.204348
+        },
+        {
+          "threshold": 0.09,
+          "coverage": 1.0,
+          "selective_error": 0.204348,
+          "per_query_risk": 0.204348
+        },
+        {
+          "threshold": 0.1,
+          "coverage": 1.0,
+          "selective_error": 0.204348,
+          "per_query_risk": 0.204348
+        },
+        {
+          "threshold": 0.11,
+          "coverage": 1.0,
+          "selective_error": 0.204348,
+          "per_query_risk": 0.204348
+        },
+        {
+          "threshold": 0.12,
+          "coverage": 1.0,
+          "selective_error": 0.204348,
+          "per_query_risk": 0.204348
+        },
+        {
+          "threshold": 0.13,
+          "coverage": 1.0,
+          "selective_error": 0.204348,
+          "per_query_risk": 0.204348
+        },
+        {
+          "threshold": 0.14,
+          "coverage": 1.0,
+          "selective_error": 0.204348,
+          "per_query_risk": 0.204348
+        },
+        {
+          "threshold": 0.15,
+          "coverage": 1.0,
+          "selective_error": 0.204348,
+          "per_query_risk": 0.204348
+        },
+        {
+          "threshold": 0.16,
+          "coverage": 0.9978,
+          "selective_error": 0.202614,
+          "per_query_risk": 0.202174
+        },
+        {
+          "threshold": 0.17,
+          "coverage": 0.9978,
+          "selective_error": 0.202614,
+          "per_query_risk": 0.202174
+        },
+        {
+          "threshold": 0.18,
+          "coverage": 0.9957,
+          "selective_error": 0.200873,
+          "per_query_risk": 0.2
+        },
+        {
+          "threshold": 0.19,
+          "coverage": 0.9957,
+          "selective_error": 0.200873,
+          "per_query_risk": 0.2
+        },
+        {
+          "threshold": 0.2,
+          "coverage": 0.9957,
+          "selective_error": 0.200873,
+          "per_query_risk": 0.2
+        },
+        {
+          "threshold": 0.21,
+          "coverage": 0.9957,
+          "selective_error": 0.200873,
+          "per_query_risk": 0.2
+        },
+        {
+          "threshold": 0.22,
+          "coverage": 0.9957,
+          "selective_error": 0.200873,
+          "per_query_risk": 0.2
+        },
+        {
+          "threshold": 0.23,
+          "coverage": 0.9957,
+          "selective_error": 0.200873,
+          "per_query_risk": 0.2
+        },
+        {
+          "threshold": 0.24,
+          "coverage": 0.9957,
+          "selective_error": 0.200873,
+          "per_query_risk": 0.2
+        },
+        {
+          "threshold": 0.25,
+          "coverage": 0.9957,
+          "selective_error": 0.200873,
+          "per_query_risk": 0.2
+        },
+        {
+          "threshold": 0.26,
+          "coverage": 0.9935,
+          "selective_error": 0.199125,
+          "per_query_risk": 0.197826
+        },
+        {
+          "threshold": 0.27,
+          "coverage": 0.9913,
+          "selective_error": 0.197368,
+          "per_query_risk": 0.195652
+        },
+        {
+          "threshold": 0.28,
+          "coverage": 0.987,
+          "selective_error": 0.193833,
+          "per_query_risk": 0.191304
+        },
+        {
+          "threshold": 0.29,
+          "coverage": 0.9848,
+          "selective_error": 0.192053,
+          "per_query_risk": 0.18913
+        },
+        {
+          "threshold": 0.3,
+          "coverage": 0.9826,
+          "selective_error": 0.190265,
+          "per_query_risk": 0.186957
+        },
+        {
+          "threshold": 0.31,
+          "coverage": 0.9826,
+          "selective_error": 0.190265,
+          "per_query_risk": 0.186957
+        },
+        {
+          "threshold": 0.32,
+          "coverage": 0.9826,
+          "selective_error": 0.190265,
+          "per_query_risk": 0.186957
+        },
+        {
+          "threshold": 0.33,
+          "coverage": 0.9826,
+          "selective_error": 0.190265,
+          "per_query_risk": 0.186957
+        },
+        {
+          "threshold": 0.34,
+          "coverage": 0.9804,
+          "selective_error": 0.18847,
+          "per_query_risk": 0.184783
+        },
+        {
+          "threshold": 0.35,
+          "coverage": 0.9783,
+          "selective_error": 0.186667,
+          "per_query_risk": 0.182609
+        },
+        {
+          "threshold": 0.36,
+          "coverage": 0.9761,
+          "selective_error": 0.184855,
+          "per_query_risk": 0.180435
+        },
+        {
+          "threshold": 0.37,
+          "coverage": 0.9717,
+          "selective_error": 0.181208,
+          "per_query_risk": 0.176087
+        },
+        {
+          "threshold": 0.38,
+          "coverage": 0.9696,
+          "selective_error": 0.179372,
+          "per_query_risk": 0.173913
+        },
+        {
+          "threshold": 0.39,
+          "coverage": 0.9696,
+          "selective_error": 0.179372,
+          "per_query_risk": 0.173913
+        },
+        {
+          "threshold": 0.4,
+          "coverage": 0.9674,
+          "selective_error": 0.179775,
+          "per_query_risk": 0.173913
+        },
+        {
+          "threshold": 0.41,
+          "coverage": 0.9674,
+          "selective_error": 0.179775,
+          "per_query_risk": 0.173913
+        },
+        {
+          "threshold": 0.42,
+          "coverage": 0.9674,
+          "selective_error": 0.179775,
+          "per_query_risk": 0.173913
+        },
+        {
+          "threshold": 0.43,
+          "coverage": 0.9652,
+          "selective_error": 0.18018,
+          "per_query_risk": 0.173913
+        },
+        {
+          "threshold": 0.44,
+          "coverage": 0.963,
+          "selective_error": 0.17833,
+          "per_query_risk": 0.171739
+        },
+        {
+          "threshold": 0.45,
+          "coverage": 0.9587,
+          "selective_error": 0.174603,
+          "per_query_risk": 0.167391
+        },
+        {
+          "threshold": 0.46,
+          "coverage": 0.9543,
+          "selective_error": 0.170843,
+          "per_query_risk": 0.163043
+        },
+        {
+          "threshold": 0.47,
+          "coverage": 0.9522,
+          "selective_error": 0.171233,
+          "per_query_risk": 0.163043
+        },
+        {
+          "threshold": 0.48,
+          "coverage": 0.95,
+          "selective_error": 0.171625,
+          "per_query_risk": 0.163043
+        },
+        {
+          "threshold": 0.49,
+          "coverage": 0.9391,
+          "selective_error": 0.164352,
+          "per_query_risk": 0.154348
+        },
+        {
+          "threshold": 0.5,
+          "coverage": 0.9326,
+          "selective_error": 0.160839,
+          "per_query_risk": 0.15
+        },
+        {
+          "threshold": 0.51,
+          "coverage": 0.9283,
+          "selective_error": 0.156909,
+          "per_query_risk": 0.145652
+        },
+        {
+          "threshold": 0.52,
+          "coverage": 0.9239,
+          "selective_error": 0.155294,
+          "per_query_risk": 0.143478
+        },
+        {
+          "threshold": 0.53,
+          "coverage": 0.913,
+          "selective_error": 0.147619,
+          "per_query_risk": 0.134783
+        },
+        {
+          "threshold": 0.54,
+          "coverage": 0.913,
+          "selective_error": 0.147619,
+          "per_query_risk": 0.134783
+        },
+        {
+          "threshold": 0.55,
+          "coverage": 0.9109,
+          "selective_error": 0.145585,
+          "per_query_risk": 0.132609
+        },
+        {
+          "threshold": 0.56,
+          "coverage": 0.9109,
+          "selective_error": 0.145585,
+          "per_query_risk": 0.132609
+        },
+        {
+          "threshold": 0.57,
+          "coverage": 0.9,
+          "selective_error": 0.144928,
+          "per_query_risk": 0.130435
+        },
+        {
+          "threshold": 0.58,
+          "coverage": 0.8935,
+          "selective_error": 0.138686,
+          "per_query_risk": 0.123913
+        },
+        {
+          "threshold": 0.59,
+          "coverage": 0.8891,
+          "selective_error": 0.136919,
+          "per_query_risk": 0.121739
+        },
+        {
+          "threshold": 0.6,
+          "coverage": 0.8826,
+          "selective_error": 0.133005,
+          "per_query_risk": 0.117391
+        },
+        {
+          "threshold": 0.61,
+          "coverage": 0.8761,
+          "selective_error": 0.131514,
+          "per_query_risk": 0.115217
+        },
+        {
+          "threshold": 0.62,
+          "coverage": 0.8739,
+          "selective_error": 0.129353,
+          "per_query_risk": 0.113043
+        },
+        {
+          "threshold": 0.63,
+          "coverage": 0.8696,
+          "selective_error": 0.125,
+          "per_query_risk": 0.108696
+        },
+        {
+          "threshold": 0.64,
+          "coverage": 0.8674,
+          "selective_error": 0.122807,
+          "per_query_risk": 0.106522
+        },
+        {
+          "threshold": 0.65,
+          "coverage": 0.863,
+          "selective_error": 0.120907,
+          "per_query_risk": 0.104348
+        },
+        {
+          "threshold": 0.66,
+          "coverage": 0.8565,
+          "selective_error": 0.114213,
+          "per_query_risk": 0.097826
+        },
+        {
+          "threshold": 0.67,
+          "coverage": 0.85,
+          "selective_error": 0.107417,
+          "per_query_risk": 0.091304
+        },
+        {
+          "threshold": 0.68,
+          "coverage": 0.8478,
+          "selective_error": 0.105128,
+          "per_query_risk": 0.08913
+        },
+        {
+          "threshold": 0.69,
+          "coverage": 0.8457,
+          "selective_error": 0.102828,
+          "per_query_risk": 0.086957
+        },
+        {
+          "threshold": 0.7,
+          "coverage": 0.8435,
+          "selective_error": 0.100515,
+          "per_query_risk": 0.084783
+        },
+        {
+          "threshold": 0.71,
+          "coverage": 0.8413,
+          "selective_error": 0.098191,
+          "per_query_risk": 0.082609
+        },
+        {
+          "threshold": 0.72,
+          "coverage": 0.837,
+          "selective_error": 0.096104,
+          "per_query_risk": 0.080435
+        },
+        {
+          "threshold": 0.73,
+          "coverage": 0.837,
+          "selective_error": 0.096104,
+          "per_query_risk": 0.080435
+        },
+        {
+          "threshold": 0.74,
+          "coverage": 0.8326,
+          "selective_error": 0.091384,
+          "per_query_risk": 0.076087
+        },
+        {
+          "threshold": 0.75,
+          "coverage": 0.8304,
+          "selective_error": 0.089005,
+          "per_query_risk": 0.073913
+        },
+        {
+          "threshold": 0.76,
+          "coverage": 0.8196,
+          "selective_error": 0.079576,
+          "per_query_risk": 0.065217
+        },
+        {
+          "threshold": 0.77,
+          "coverage": 0.8174,
+          "selective_error": 0.079787,
+          "per_query_risk": 0.065217
+        },
+        {
+          "threshold": 0.78,
+          "coverage": 0.8152,
+          "selective_error": 0.077333,
+          "per_query_risk": 0.063043
+        },
+        {
+          "threshold": 0.79,
+          "coverage": 0.8109,
+          "selective_error": 0.075067,
+          "per_query_risk": 0.06087
+        },
+        {
+          "threshold": 0.8,
+          "coverage": 0.8022,
+          "selective_error": 0.070461,
+          "per_query_risk": 0.056522
+        },
+        {
+          "threshold": 0.81,
+          "coverage": 0.7957,
+          "selective_error": 0.071038,
+          "per_query_risk": 0.056522
+        },
+        {
+          "threshold": 0.82,
+          "coverage": 0.787,
+          "selective_error": 0.066298,
+          "per_query_risk": 0.052174
+        },
+        {
+          "threshold": 0.83,
+          "coverage": 0.7826,
+          "selective_error": 0.066667,
+          "per_query_risk": 0.052174
+        },
+        {
+          "threshold": 0.84,
+          "coverage": 0.7783,
+          "selective_error": 0.061453,
+          "per_query_risk": 0.047826
+        },
+        {
+          "threshold": 0.85,
+          "coverage": 0.7717,
+          "selective_error": 0.056338,
+          "per_query_risk": 0.043478
+        },
+        {
+          "threshold": 0.86,
+          "coverage": 0.7696,
+          "selective_error": 0.056497,
+          "per_query_risk": 0.043478
+        },
+        {
+          "threshold": 0.87,
+          "coverage": 0.763,
+          "selective_error": 0.054131,
+          "per_query_risk": 0.041304
+        },
+        {
+          "threshold": 0.88,
+          "coverage": 0.7478,
+          "selective_error": 0.046512,
+          "per_query_risk": 0.034783
+        },
+        {
+          "threshold": 0.89,
+          "coverage": 0.7413,
+          "selective_error": 0.046921,
+          "per_query_risk": 0.034783
+        },
+        {
+          "threshold": 0.9,
+          "coverage": 0.7413,
+          "selective_error": 0.046921,
+          "per_query_risk": 0.034783
+        },
+        {
+          "threshold": 0.91,
+          "coverage": 0.7326,
+          "selective_error": 0.04451,
+          "per_query_risk": 0.032609
+        },
+        {
+          "threshold": 0.92,
+          "coverage": 0.7261,
+          "selective_error": 0.041916,
+          "per_query_risk": 0.030435
+        },
+        {
+          "threshold": 0.93,
+          "coverage": 0.7196,
+          "selective_error": 0.042296,
+          "per_query_risk": 0.030435
+        },
+        {
+          "threshold": 0.94,
+          "coverage": 0.7043,
+          "selective_error": 0.040123,
+          "per_query_risk": 0.028261
+        },
+        {
+          "threshold": 0.95,
+          "coverage": 0.6978,
+          "selective_error": 0.037383,
+          "per_query_risk": 0.026087
+        },
+        {
+          "threshold": 0.96,
+          "coverage": 0.6848,
+          "selective_error": 0.034921,
+          "per_query_risk": 0.023913
+        },
+        {
+          "threshold": 0.97,
+          "coverage": 0.6696,
+          "selective_error": 0.035714,
+          "per_query_risk": 0.023913
+        },
+        {
+          "threshold": 0.98,
+          "coverage": 0.6261,
+          "selective_error": 0.027778,
+          "per_query_risk": 0.017391
+        },
+        {
+          "threshold": 0.99,
+          "coverage": 0.5739,
+          "selective_error": 0.030303,
+          "per_query_risk": 0.017391
+        },
+        {
+          "threshold": 1.0,
+          "coverage": 0.5087,
+          "selective_error": 0.034188,
+          "per_query_risk": 0.017391
+        }
+      ]
+    },
+    "operating_points": {
+      "assumptions": {
+        "jev_usd_per_1k_queries": 0.1455,
+        "fallback_usd_per_1k_queries": 4.2,
+        "human_review_usd_per_1k_queries": 0.0
+      },
+      "operating_points": [
+        {
+          "name": "certified risk <= 5%",
+          "alpha": 0.05,
+          "threshold": 0.831,
+          "certified": true,
+          "coverage": 0.8475,
+          "selective_error": 0.0265,
+          "selective_error_ucb95": 0.0459,
+          "per_query_loss": 0.0225,
+          "certified_per_query_loss": 0.0499,
+          "escalation_rate": 0.1525,
+          "cost_per_1k_usd": 0.786,
+          "measured": {
+            "n": 400,
+            "routed": 339,
+            "routed_correct": 330,
+            "routed_wrong": 9,
+            "abstained": 61,
+            "coverage": 0.8475,
+            "selective_error": 0.0265,
+            "selective_error_wilson95": [
+              0.014,
+              0.0497
+            ],
+            "selective_error_cp_ucb95": 0.0459,
+            "per_query_risk": 0.0225,
+            "per_query_risk_wilson95": [
+              0.0119,
+              0.0422
+            ]
+          }
+        },
+        {
+          "name": "saturated threshold 0.999 (not certified)",
+          "alpha": null,
+          "threshold": 0.999,
+          "certified": false,
+          "coverage": 0.6275,
+          "selective_error": 0.004,
+          "selective_error_ucb95": 0.0188,
+          "per_query_loss": 0.0025,
+          "certified_per_query_loss": null,
+          "escalation_rate": 0.3725,
+          "cost_per_1k_usd": 1.71,
+          "measured": {
+            "n": 400,
+            "routed": 251,
+            "routed_correct": 250,
+            "routed_wrong": 1,
+            "abstained": 149,
+            "coverage": 0.6275,
+            "selective_error": 0.004,
+            "selective_error_wilson95": [
+              0.0007,
+              0.0222
+            ],
+            "selective_error_cp_ucb95": 0.0188,
+            "per_query_risk": 0.0025,
+            "per_query_risk_wilson95": [
+              0.0004,
+              0.014
+            ]
+          }
+        },
+        {
+          "name": "hand-picked threshold 0.5",
+          "alpha": null,
+          "threshold": 0.5,
+          "certified": false,
+          "coverage": 0.985,
+          "selective_error": 0.0609,
+          "selective_error_ucb95": 0.0846,
+          "per_query_loss": 0.06,
+          "certified_per_query_loss": null,
+          "escalation_rate": 0.015,
+          "cost_per_1k_usd": 0.2085,
+          "measured": {
+            "n": 400,
+            "routed": 394,
+            "routed_correct": 370,
+            "routed_wrong": 24,
+            "abstained": 6,
+            "coverage": 0.985,
+            "selective_error": 0.0609,
+            "selective_error_wilson95": [
+              0.0413,
+              0.089
+            ],
+            "selective_error_cp_ucb95": 0.0846,
+            "per_query_risk": 0.06,
+            "per_query_risk_wilson95": [
+              0.0406,
+              0.0877
+            ]
+          }
+        },
+        {
+          "name": "hand-picked threshold 0.7",
+          "alpha": null,
+          "threshold": 0.7,
+          "certified": false,
+          "coverage": 0.9125,
+          "selective_error": 0.0384,
+          "selective_error_ucb95": 0.0593,
+          "per_query_loss": 0.035,
+          "certified_per_query_loss": null,
+          "escalation_rate": 0.0875,
+          "cost_per_1k_usd": 0.513,
+          "measured": {
+            "n": 400,
+            "routed": 365,
+            "routed_correct": 351,
+            "routed_wrong": 14,
+            "abstained": 35,
+            "coverage": 0.9125,
+            "selective_error": 0.0384,
+            "selective_error_wilson95": [
+              0.023,
+              0.0633
+            ],
+            "selective_error_cp_ucb95": 0.0593,
+            "per_query_risk": 0.035,
+            "per_query_risk_wilson95": [
+              0.021,
+              0.0579
+            ]
+          }
+        },
+        {
+          "name": "hand-picked threshold 0.9",
+          "alpha": null,
+          "threshold": 0.9,
+          "certified": false,
+          "coverage": 0.8225,
+          "selective_error": 0.0213,
+          "selective_error_ucb95": 0.0396,
+          "per_query_loss": 0.0175,
+          "certified_per_query_loss": null,
+          "escalation_rate": 0.1775,
+          "cost_per_1k_usd": 0.891,
+          "measured": {
+            "n": 400,
+            "routed": 329,
+            "routed_correct": 322,
+            "routed_wrong": 7,
+            "abstained": 71,
+            "coverage": 0.8225,
+            "selective_error": 0.0213,
+            "selective_error_wilson95": [
+              0.0103,
+              0.0433
+            ],
+            "selective_error_cp_ucb95": 0.0396,
+            "per_query_risk": 0.0175,
+            "per_query_risk_wilson95": [
+              0.0085,
+              0.0357
+            ]
+          }
+        },
+        {
+          "name": "hand-picked threshold 0.99",
+          "alpha": null,
+          "threshold": 0.99,
+          "certified": false,
+          "coverage": 0.705,
+          "selective_error": 0.0071,
+          "selective_error_ucb95": 0.0222,
+          "per_query_loss": 0.005,
+          "certified_per_query_loss": null,
+          "escalation_rate": 0.295,
+          "cost_per_1k_usd": 1.3845,
+          "measured": {
+            "n": 400,
+            "routed": 282,
+            "routed_correct": 280,
+            "routed_wrong": 2,
+            "abstained": 118,
+            "coverage": 0.705,
+            "selective_error": 0.0071,
+            "selective_error_wilson95": [
+              0.0019,
+              0.0255
+            ],
+            "selective_error_cp_ucb95": 0.0222,
+            "per_query_risk": 0.005,
+            "per_query_risk_wilson95": [
+              0.0014,
+              0.018
+            ]
+          }
+        }
+      ],
+      "always_llm": {
+        "name": "always LLM (no router)",
+        "coverage": 1.0,
+        "selective_error": null,
+        "cost_per_1k_usd": 4.2
+      },
+      "note": "per_query_loss is the expected share of incoming queries that are routed and answered wrongly; the certified column is the finite-sample bound from conformal risk control, the other columns are measurements. The always-LLM row's accuracy is NOT measured here -- only its cost is, from the stated assumption -- so compare it on price, not on quality.",
+      "n_evaluation": 400,
+      "savings_vs_always_llm_pct": 81.29,
+      "certificate_held": true
+    },
+    "primary": {
+      "alpha": 0.05,
+      "feasible": true,
+      "threshold": 0.831,
+      "certified_per_query_loss": 0.0499,
+      "calibration_per_query_loss": 0.0478,
+      "calibration_n": 460,
+      "min_attainable_bound": 0.0195,
+      "note": "",
+      "measured_on_holdout": {
+        "n": 400,
+        "routed": 339,
+        "routed_correct": 330,
+        "routed_wrong": 9,
+        "abstained": 61,
+        "coverage": 0.8475,
+        "selective_error": 0.0265,
+        "selective_error_wilson95": [
+          0.014,
+          0.0497
+        ],
+        "selective_error_cp_ucb95": 0.0459,
+        "per_query_risk": 0.0225,
+        "per_query_risk_wilson95": [
+          0.0119,
+          0.0422
+        ]
+      },
+      "certificate_held": true,
+      "coverage": 0.8475
+    }
+  },
+  "prediction_sets": {
+    "alpha": 0.05,
+    "scores": {
+      "aps": {
+        "qhat_calibration": 1.0,
+        "infinite_qhat": false,
+        "at_calibrated_qhat": {
+          "qhat": 1.0,
+          "coverage": 0.9975,
+          "coverage_ci_lo": 0.986,
+          "coverage_ci_hi": 0.9996,
+          "mean_set_size": 148.5375,
+          "top1_fallbacks": 0
+        },
+        "curve": [
+          {
+            "qhat": 0.5,
+            "coverage": 0.93,
+            "coverage_ci_lo": 0.9007,
+            "coverage_ci_hi": 0.9511,
+            "mean_set_size": 1.0,
+            "top1_fallbacks": 393
+          },
+          {
+            "qhat": 0.9,
+            "coverage": 0.94,
+            "coverage_ci_lo": 0.9123,
+            "coverage_ci_hi": 0.9594,
+            "mean_set_size": 1.0825,
+            "top1_fallbacks": 327
+          },
+          {
+            "qhat": 1.0,
+            "coverage": 0.9975,
+            "coverage_ci_lo": 0.986,
+            "coverage_ci_hi": 0.9996,
+            "mean_set_size": 148.5375,
+            "top1_fallbacks": 0
+          },
+          {
+            "qhat": 1.1,
+            "coverage": 1.0,
+            "coverage_ci_lo": 0.9905,
+            "coverage_ci_hi": 1.0,
+            "mean_set_size": 150.0,
+            "top1_fallbacks": 0
+          }
+        ]
+      },
+      "lac": {
+        "qhat_calibration": 1.0,
+        "infinite_qhat": false,
+        "at_calibrated_qhat": {
+          "qhat": 1.0,
+          "coverage": 1.0,
+          "coverage_ci_lo": 0.9905,
+          "coverage_ci_hi": 1.0,
+          "mean_set_size": 150.0,
+          "top1_fallbacks": 0
+        },
+        "curve": [
+          {
+            "qhat": 0.5,
+            "coverage": 0.93,
+            "coverage_ci_lo": 0.9007,
+            "coverage_ci_hi": 0.9511,
+            "mean_set_size": 1.0,
+            "top1_fallbacks": 6
+          },
+          {
+            "qhat": 0.9,
+            "coverage": 0.97,
+            "coverage_ci_lo": 0.9483,
+            "coverage_ci_hi": 0.9828,
+            "mean_set_size": 1.18,
+            "top1_fallbacks": 0
+          },
+          {
+            "qhat": 1.0,
+            "coverage": 1.0,
+            "coverage_ci_lo": 0.9905,
+            "coverage_ci_hi": 1.0,
+            "mean_set_size": 150.0,
+            "top1_fallbacks": 0
+          },
+          {
+            "qhat": 1.1,
+            "coverage": 1.0,
+            "coverage_ci_lo": 0.9905,
+            "coverage_ci_hi": 1.0,
+            "mean_set_size": 150.0,
+            "top1_fallbacks": 0
+          }
+        ]
+      }
+    }
+  },
+  "quantization": {
+    "answers": 860,
+    "distinct_top_probabilities": 94,
+    "distinct_values_are_multiples_of_0.01": "60/94",
+    "min_positive_top_probability": 0.15,
+    "share_at_1.0": 0.564,
+    "error_rate_at_1.0": 0.0186,
+    "errors_at_1.0": 9,
+    "histogram_bin_width": 0.05,
+    "histogram_counts": [
+      0,
+      0,
+      0,
+      2,
+      0,
+      6,
+      2,
+      6,
+      5,
+      16,
+      20,
+      18,
+      16,
+      16,
+      10,
+      22,
+      29,
+      22,
+      38,
+      632
+    ],
+    "histogram_errors": [
+      0,
+      0,
+      0,
+      2,
+      0,
+      6,
+      2,
+      5,
+      3,
+      11,
+      13,
+      9,
+      9,
+      9,
+      6,
+      9,
+      9,
+      6,
+      7,
+      16
+    ],
+    "note": "Shares at 1.0 with errors behind them are the reason a strict threshold cannot drive the measured risk to zero, and therefore the reason a very small alpha is infeasible at a given sample size."
+  },
+  "gate": {
+    "calibration_n": 460,
+    "evaluation_n": 700,
+    "certificates": [
+      {
+        "alpha": 0.01,
+        "feasible": true,
+        "threshold": 0.671,
+        "certified_false_accept_per_query": 0.0065,
+        "min_attainable_bound": 0.0022,
+        "note": "",
+        "measured": {
+          "n": 700,
+          "routed": 333,
+          "routed_correct": 328,
+          "routed_wrong": 5,
+          "abstained": 367,
+          "coverage": 0.4757,
+          "selective_error": 0.015,
+          "selective_error_wilson95": [
+            0.0064,
+            0.0347
+          ],
+          "selective_error_cp_ucb95": 0.0389,
+          "per_query_risk": 0.0071,
+          "per_query_risk_wilson95": [
+            0.0031,
+            0.0166
+          ]
+        },
+        "in_scope_pass_rate": 0.82,
+        "out_of_scope_accept_rate": 0.0167,
+        "certificate_held": true,
+        "measured_on_prevalence_matched_mix": {
+          "n": 460,
+          "routed": 330,
+          "routed_correct": 328,
+          "routed_wrong": 2,
+          "abstained": 130,
+          "coverage": 0.7174,
+          "selective_error": 0.0061,
+          "selective_error_wilson95": [
+            0.0017,
+            0.0218
+          ],
+          "selective_error_cp_ucb95": 0.0252,
+          "per_query_risk": 0.0043,
+          "per_query_risk_wilson95": [
+            0.0012,
+            0.0157
+          ]
+        },
+        "certificate_held_at_matched_prevalence": true
+      },
+      {
+        "alpha": 0.02,
+        "feasible": true,
+        "threshold": 0.221,
+        "certified_false_accept_per_query": 0.0195,
+        "min_attainable_bound": 0.0022,
+        "note": "",
+        "measured": {
+          "n": 700,
+          "routed": 443,
+          "routed_correct": 388,
+          "routed_wrong": 55,
+          "abstained": 257,
+          "coverage": 0.6329,
+          "selective_error": 0.1242,
+          "selective_error_wilson95": [
+            0.0966,
+            0.1581
+          ],
+          "selective_error_cp_ucb95": 0.1602,
+          "per_query_risk": 0.0786,
+          "per_query_risk_wilson95": [
+            0.0609,
+            0.1009
+          ]
+        },
+        "in_scope_pass_rate": 0.97,
+        "out_of_scope_accept_rate": 0.1833,
+        "certificate_held": false,
+        "measured_on_prevalence_matched_mix": {
+          "n": 460,
+          "routed": 398,
+          "routed_correct": 388,
+          "routed_wrong": 10,
+          "abstained": 62,
+          "coverage": 0.8652,
+          "selective_error": 0.0251,
+          "selective_error_wilson95": [
+            0.0137,
+            0.0456
+          ],
+          "selective_error_cp_ucb95": 0.0468,
+          "per_query_risk": 0.0217,
+          "per_query_risk_wilson95": [
+            0.0119,
+            0.0395
+          ]
+        },
+        "certificate_held_at_matched_prevalence": false
+      },
+      {
+        "alpha": 0.05,
+        "feasible": true,
+        "threshold": 0.111,
+        "certified_false_accept_per_query": 0.0456,
+        "min_attainable_bound": 0.0022,
+        "note": "",
+        "measured": {
+          "n": 700,
+          "routed": 513,
+          "routed_correct": 397,
+          "routed_wrong": 116,
+          "abstained": 187,
+          "coverage": 0.7329,
+          "selective_error": 0.2261,
+          "selective_error_wilson95": [
+            0.192,
+            0.2643
+          ],
+          "selective_error_cp_ucb95": 0.2586,
+          "per_query_risk": 0.1657,
+          "per_query_risk_wilson95": [
+            0.14,
+            0.1951
+          ]
+        },
+        "in_scope_pass_rate": 0.9925,
+        "out_of_scope_accept_rate": 0.3867,
+        "certificate_held": false,
+        "measured_on_prevalence_matched_mix": {
+          "n": 460,
+          "routed": 421,
+          "routed_correct": 397,
+          "routed_wrong": 24,
+          "abstained": 39,
+          "coverage": 0.9152,
+          "selective_error": 0.057,
+          "selective_error_wilson95": [
+            0.0386,
+            0.0834
+          ],
+          "selective_error_cp_ucb95": 0.0792,
+          "per_query_risk": 0.0522,
+          "per_query_risk_wilson95": [
+            0.0353,
+            0.0765
+          ]
+        },
+        "certificate_held_at_matched_prevalence": false
+      },
+      {
+        "alpha": 0.1,
+        "feasible": true,
+        "threshold": 0.071,
+        "certified_false_accept_per_query": 0.0998,
+        "min_attainable_bound": 0.0022,
+        "note": "",
+        "measured": {
+          "n": 700,
+          "routed": 632,
+          "routed_correct": 400,
+          "routed_wrong": 232,
+          "abstained": 68,
+          "coverage": 0.9029,
+          "selective_error": 0.3671,
+          "selective_error_wilson95": [
+            0.3304,
+            0.4054
+          ],
+          "selective_error_cp_ucb95": 0.3927,
+          "per_query_risk": 0.3314,
+          "per_query_risk_wilson95": [
+            0.2976,
+            0.3671
+          ]
+        },
+        "in_scope_pass_rate": 1.0,
+        "out_of_scope_accept_rate": 0.7733,
+        "certificate_held": false,
+        "measured_on_prevalence_matched_mix": {
+          "n": 460,
+          "routed": 451,
+          "routed_correct": 400,
+          "routed_wrong": 51,
+          "abstained": 9,
+          "coverage": 0.9804,
+          "selective_error": 0.1131,
+          "selective_error_wilson95": [
+            0.0871,
+            0.1456
+          ],
+          "selective_error_cp_ucb95": 0.1346,
+          "per_query_risk": 0.1109,
+          "per_query_risk_wilson95": [
+            0.0853,
+            0.1428
+          ]
+        },
+        "certificate_held_at_matched_prevalence": false
+      }
+    ],
+    "sample_answers": [
+      {
+        "text": "make an ad to sell my real estate",
+        "gold": "out-of-scope",
+        "in_scope_probability": 0.05
+      },
+      {
+        "text": "are there any new job postings in my area in the last hour for jobs on craigslist",
+        "gold": "out-of-scope",
+        "in_scope_probability": 0.05
+      },
+      {
+        "text": "pull up the classifieds and read the career section to me",
+        "gold": "out-of-scope",
+        "in_scope_probability": 0.05
+      },
+      {
+        "text": "how can i repair a broken watch",
+        "gold": "out-of-scope",
+        "in_scope_probability": 0.06
+      },
+      {
+        "text": "how much has microsoft's stock changed over the last year",
+        "gold": "out-of-scope",
+        "in_scope_probability": 0.06
+      },
+      {
+        "text": "search all movies created by disney in the 1980's",
+        "gold": "out-of-scope",
+        "in_scope_probability": 0.06
+      }
+    ],
+    "calibration_uncovered_prevalence": 0.1304,
+    "evaluation_uncovered_prevalence": 0.4286,
+    "calibration_curve": [
+      {
+        "threshold": 0.0,
+        "coverage": 1.0,
+        "selective_error": 0.428571,
+        "per_query_risk": 0.428571
+      },
+      {
+        "threshold": 0.01,
+        "coverage": 1.0,
+        "selective_error": 0.428571,
+        "per_query_risk": 0.428571
+      },
+      {
+        "threshold": 0.02,
+        "coverage": 1.0,
+        "selective_error": 0.428571,
+        "per_query_risk": 0.428571
+      },
+      {
+        "threshold": 0.03,
+        "coverage": 1.0,
+        "selective_error": 0.428571,
+        "per_query_risk": 0.428571
+      },
+      {
+        "threshold": 0.04,
+        "coverage": 1.0,
+        "selective_error": 0.428571,
+        "per_query_risk": 0.428571
+      },
+      {
+        "threshold": 0.05,
+        "coverage": 1.0,
+        "selective_error": 0.428571,
+        "per_query_risk": 0.428571
+      },
+      {
+        "threshold": 0.06,
+        "coverage": 0.9957,
+        "selective_error": 0.426112,
+        "per_query_risk": 0.424286
+      },
+      {
+        "threshold": 0.07,
+        "coverage": 0.9557,
+        "selective_error": 0.402093,
+        "per_query_risk": 0.384286
+      },
+      {
+        "threshold": 0.08,
+        "coverage": 0.9029,
+        "selective_error": 0.367089,
+        "per_query_risk": 0.331429
+      },
+      {
+        "threshold": 0.09,
+        "coverage": 0.8457,
+        "selective_error": 0.326014,
+        "per_query_risk": 0.275714
+      },
+      {
+        "threshold": 0.1,
+        "coverage": 0.7829,
+        "selective_error": 0.275547,
+        "per_query_risk": 0.215714
+      },
+      {
+        "threshold": 0.11,
+        "coverage": 0.7557,
+        "selective_error": 0.249527,
+        "per_query_risk": 0.188571
+      },
+      {
+        "threshold": 0.12,
+        "coverage": 0.7329,
+        "selective_error": 0.226121,
+        "per_query_risk": 0.165714
+      },
+      {
+        "threshold": 0.13,
+        "coverage": 0.7171,
+        "selective_error": 0.211155,
+        "per_query_risk": 0.151429
+      },
+      {
+        "threshold": 0.14,
+        "coverage": 0.7,
+        "selective_error": 0.191837,
+        "per_query_risk": 0.134286
+      },
+      {
+        "threshold": 0.15,
+        "coverage": 0.6886,
+        "selective_error": 0.180498,
+        "per_query_risk": 0.124286
+      },
+      {
+        "threshold": 0.16,
+        "coverage": 0.6757,
+        "selective_error": 0.164905,
+        "per_query_risk": 0.111429
+      },
+      {
+        "threshold": 0.17,
+        "coverage": 0.6643,
+        "selective_error": 0.152688,
+        "per_query_risk": 0.101429
+      },
+      {
+        "threshold": 0.18,
+        "coverage": 0.6571,
+        "selective_error": 0.147826,
+        "per_query_risk": 0.097143
+      },
+      {
+        "threshold": 0.19,
+        "coverage": 0.6529,
+        "selective_error": 0.142232,
+        "per_query_risk": 0.092857
+      },
+      {
+        "threshold": 0.2,
+        "coverage": 0.6486,
+        "selective_error": 0.140969,
+        "per_query_risk": 0.091429
+      },
+      {
+        "threshold": 0.21,
+        "coverage": 0.6429,
+        "selective_error": 0.133333,
+        "per_query_risk": 0.085714
+      },
+      {
+        "threshold": 0.22,
+        "coverage": 0.6386,
+        "selective_error": 0.129754,
+        "per_query_risk": 0.082857
+      },
+      {
+        "threshold": 0.23,
+        "coverage": 0.6329,
+        "selective_error": 0.124153,
+        "per_query_risk": 0.078571
+      },
+      {
+        "threshold": 0.24,
+        "coverage": 0.6271,
+        "selective_error": 0.120729,
+        "per_query_risk": 0.075714
+      },
+      {
+        "threshold": 0.25,
+        "coverage": 0.6229,
+        "selective_error": 0.119266,
+        "per_query_risk": 0.074286
+      },
+      {
+        "threshold": 0.26,
+        "coverage": 0.6214,
+        "selective_error": 0.11954,
+        "per_query_risk": 0.074286
+      },
+      {
+        "threshold": 0.27,
+        "coverage": 0.6143,
+        "selective_error": 0.109302,
+        "per_query_risk": 0.067143
+      },
+      {
+        "threshold": 0.28,
+        "coverage": 0.61,
+        "selective_error": 0.107728,
+        "per_query_risk": 0.065714
+      },
+      {
+        "threshold": 0.29,
+        "coverage": 0.6071,
+        "selective_error": 0.103529,
+        "per_query_risk": 0.062857
+      },
+      {
+        "threshold": 0.3,
+        "coverage": 0.6057,
+        "selective_error": 0.101415,
+        "per_query_risk": 0.061429
+      },
+      {
+        "threshold": 0.31,
+        "coverage": 0.6,
+        "selective_error": 0.097619,
+        "per_query_risk": 0.058571
+      },
+      {
+        "threshold": 0.32,
+        "coverage": 0.5957,
+        "selective_error": 0.093525,
+        "per_query_risk": 0.055714
+      },
+      {
+        "threshold": 0.33,
+        "coverage": 0.5943,
+        "selective_error": 0.091346,
+        "per_query_risk": 0.054286
+      },
+      {
+        "threshold": 0.34,
+        "coverage": 0.5929,
+        "selective_error": 0.089157,
+        "per_query_risk": 0.052857
+      },
+      {
+        "threshold": 0.35,
+        "coverage": 0.5929,
+        "selective_error": 0.089157,
+        "per_query_risk": 0.052857
+      },
+      {
+        "threshold": 0.36,
+        "coverage": 0.59,
+        "selective_error": 0.087167,
+        "per_query_risk": 0.051429
+      },
+      {
+        "threshold": 0.37,
+        "coverage": 0.5843,
+        "selective_error": 0.08313,
+        "per_query_risk": 0.048571
+      },
+      {
+        "threshold": 0.38,
+        "coverage": 0.5829,
+        "selective_error": 0.080882,
+        "per_query_risk": 0.047143
+      },
+      {
+        "threshold": 0.39,
+        "coverage": 0.5814,
+        "selective_error": 0.078624,
+        "per_query_risk": 0.045714
+      },
+      {
+        "threshold": 0.4,
+        "coverage": 0.5771,
+        "selective_error": 0.076733,
+        "per_query_risk": 0.044286
+      },
+      {
+        "threshold": 0.41,
+        "coverage": 0.57,
+        "selective_error": 0.070175,
+        "per_query_risk": 0.04
+      },
+      {
+        "threshold": 0.42,
+        "coverage": 0.5657,
+        "selective_error": 0.068182,
+        "per_query_risk": 0.038571
+      },
+      {
+        "threshold": 0.43,
+        "coverage": 0.5614,
+        "selective_error": 0.063613,
+        "per_query_risk": 0.035714
+      },
+      {
+        "threshold": 0.44,
+        "coverage": 0.5571,
+        "selective_error": 0.058974,
+        "per_query_risk": 0.032857
+      },
+      {
+        "threshold": 0.45,
+        "coverage": 0.5571,
+        "selective_error": 0.058974,
+        "per_query_risk": 0.032857
+      },
+      {
+        "threshold": 0.46,
+        "coverage": 0.5557,
+        "selective_error": 0.056555,
+        "per_query_risk": 0.031429
+      },
+      {
+        "threshold": 0.47,
+        "coverage": 0.5514,
+        "selective_error": 0.054404,
+        "per_query_risk": 0.03
+      },
+      {
+        "threshold": 0.48,
+        "coverage": 0.5457,
+        "selective_error": 0.052356,
+        "per_query_risk": 0.028571
+      },
+      {
+        "threshold": 0.49,
+        "coverage": 0.5429,
+        "selective_error": 0.05,
+        "per_query_risk": 0.027143
+      },
+      {
+        "threshold": 0.5,
+        "coverage": 0.5386,
+        "selective_error": 0.045093,
+        "per_query_risk": 0.024286
+      },
+      {
+        "threshold": 0.51,
+        "coverage": 0.5386,
+        "selective_error": 0.045093,
+        "per_query_risk": 0.024286
+      },
+      {
+        "threshold": 0.52,
+        "coverage": 0.5343,
+        "selective_error": 0.045455,
+        "per_query_risk": 0.024286
+      },
+      {
+        "threshold": 0.53,
+        "coverage": 0.5314,
+        "selective_error": 0.045699,
+        "per_query_risk": 0.024286
+      },
+      {
+        "threshold": 0.54,
+        "coverage": 0.5257,
+        "selective_error": 0.043478,
+        "per_query_risk": 0.022857
+      },
+      {
+        "threshold": 0.55,
+        "coverage": 0.5229,
+        "selective_error": 0.043716,
+        "per_query_risk": 0.022857
+      },
+      {
+        "threshold": 0.56,
+        "coverage": 0.52,
+        "selective_error": 0.043956,
+        "per_query_risk": 0.022857
+      },
+      {
+        "threshold": 0.57,
+        "coverage": 0.52,
+        "selective_error": 0.043956,
+        "per_query_risk": 0.022857
+      },
+      {
+        "threshold": 0.58,
+        "coverage": 0.5171,
+        "selective_error": 0.041436,
+        "per_query_risk": 0.021429
+      },
+      {
+        "threshold": 0.59,
+        "coverage": 0.5129,
+        "selective_error": 0.038997,
+        "per_query_risk": 0.02
+      },
+      {
+        "threshold": 0.6,
+        "coverage": 0.5086,
+        "selective_error": 0.036517,
+        "per_query_risk": 0.018571
+      },
+      {
+        "threshold": 0.61,
+        "coverage": 0.5057,
+        "selective_error": 0.033898,
+        "per_query_risk": 0.017143
+      },
+      {
+        "threshold": 0.62,
+        "coverage": 0.5029,
+        "selective_error": 0.034091,
+        "per_query_risk": 0.017143
+      },
+      {
+        "threshold": 0.63,
+        "coverage": 0.4986,
+        "selective_error": 0.034384,
+        "per_query_risk": 0.017143
+      },
+      {
+        "threshold": 0.64,
+        "coverage": 0.4971,
+        "selective_error": 0.034483,
+        "per_query_risk": 0.017143
+      },
+      {
+        "threshold": 0.65,
+        "coverage": 0.4943,
+        "selective_error": 0.034682,
+        "per_query_risk": 0.017143
+      },
+      {
+        "threshold": 0.66,
+        "coverage": 0.49,
+        "selective_error": 0.026239,
+        "per_query_risk": 0.012857
+      },
+      {
+        "threshold": 0.67,
+        "coverage": 0.4829,
+        "selective_error": 0.02071,
+        "per_query_risk": 0.01
+      },
+      {
+        "threshold": 0.68,
+        "coverage": 0.4757,
+        "selective_error": 0.015015,
+        "per_query_risk": 0.007143
+      },
+      {
+        "threshold": 0.69,
+        "coverage": 0.4686,
+        "selective_error": 0.015244,
+        "per_query_risk": 0.007143
+      },
+      {
+        "threshold": 0.7,
+        "coverage": 0.4671,
+        "selective_error": 0.015291,
+        "per_query_risk": 0.007143
+      },
+      {
+        "threshold": 0.71,
+        "coverage": 0.4643,
+        "selective_error": 0.015385,
+        "per_query_risk": 0.007143
+      },
+      {
+        "threshold": 0.72,
+        "coverage": 0.46,
+        "selective_error": 0.015528,
+        "per_query_risk": 0.007143
+      },
+      {
+        "threshold": 0.73,
+        "coverage": 0.4543,
+        "selective_error": 0.015723,
+        "per_query_risk": 0.007143
+      },
+      {
+        "threshold": 0.74,
+        "coverage": 0.4486,
+        "selective_error": 0.012739,
+        "per_query_risk": 0.005714
+      },
+      {
+        "threshold": 0.75,
+        "coverage": 0.4486,
+        "selective_error": 0.012739,
+        "per_query_risk": 0.005714
+      },
+      {
+        "threshold": 0.76,
+        "coverage": 0.4429,
+        "selective_error": 0.009677,
+        "per_query_risk": 0.004286
+      },
+      {
+        "threshold": 0.77,
+        "coverage": 0.4371,
+        "selective_error": 0.009804,
+        "per_query_risk": 0.004286
+      },
+      {
+        "threshold": 0.78,
+        "coverage": 0.4286,
+        "selective_error": 0.01,
+        "per_query_risk": 0.004286
+      },
+      {
+        "threshold": 0.79,
+        "coverage": 0.4243,
+        "selective_error": 0.010101,
+        "per_query_risk": 0.004286
+      },
+      {
+        "threshold": 0.8,
+        "coverage": 0.4157,
+        "selective_error": 0.010309,
+        "per_query_risk": 0.004286
+      },
+      {
+        "threshold": 0.81,
+        "coverage": 0.4086,
+        "selective_error": 0.01049,
+        "per_query_risk": 0.004286
+      },
+      {
+        "threshold": 0.82,
+        "coverage": 0.4014,
+        "selective_error": 0.007117,
+        "per_query_risk": 0.002857
+      },
+      {
+        "threshold": 0.83,
+        "coverage": 0.3986,
+        "selective_error": 0.007168,
+        "per_query_risk": 0.002857
+      },
+      {
+        "threshold": 0.84,
+        "coverage": 0.39,
+        "selective_error": 0.007326,
+        "per_query_risk": 0.002857
+      },
+      {
+        "threshold": 0.85,
+        "coverage": 0.38,
+        "selective_error": 0.007519,
+        "per_query_risk": 0.002857
+      },
+      {
+        "threshold": 0.86,
+        "coverage": 0.3671,
+        "selective_error": 0.007782,
+        "per_query_risk": 0.002857
+      },
+      {
+        "threshold": 0.87,
+        "coverage": 0.35,
+        "selective_error": 0.008163,
+        "per_query_risk": 0.002857
+      },
+      {
+        "threshold": 0.88,
+        "coverage": 0.3386,
+        "selective_error": 0.008439,
+        "per_query_risk": 0.002857
+      },
+      {
+        "threshold": 0.89,
+        "coverage": 0.32,
+        "selective_error": 0.008929,
+        "per_query_risk": 0.002857
+      },
+      {
+        "threshold": 0.9,
+        "coverage": 0.3071,
+        "selective_error": 0.009302,
+        "per_query_risk": 0.002857
+      },
+      {
+        "threshold": 0.91,
+        "coverage": 0.2786,
+        "selective_error": 0.005128,
+        "per_query_risk": 0.001429
+      },
+      {
+        "threshold": 0.92,
+        "coverage": 0.2529,
+        "selective_error": 0.00565,
+        "per_query_risk": 0.001429
+      },
+      {
+        "threshold": 0.93,
+        "coverage": 0.2186,
+        "selective_error": 0.006536,
+        "per_query_risk": 0.001429
+      },
+      {
+        "threshold": 0.94,
+        "coverage": 0.1929,
+        "selective_error": 0.007407,
+        "per_query_risk": 0.001429
+      },
+      {
+        "threshold": 0.95,
+        "coverage": 0.1586,
+        "selective_error": 0.009009,
+        "per_query_risk": 0.001429
+      },
+      {
+        "threshold": 0.96,
+        "coverage": 0.1243,
+        "selective_error": 0.011494,
+        "per_query_risk": 0.001429
+      },
+      {
+        "threshold": 0.97,
+        "coverage": 0.08,
+        "selective_error": 0.0,
+        "per_query_risk": 0.0
+      },
+      {
+        "threshold": 0.98,
+        "coverage": 0.0229,
+        "selective_error": 0.0,
+        "per_query_risk": 0.0
+      },
+      {
+        "threshold": 0.99,
+        "coverage": 0.0,
+        "selective_error": 0.0,
+        "per_query_risk": 0.0
+      },
+      {
+        "threshold": 1.0,
+        "coverage": 0.0,
+        "selective_error": 0.0,
+        "per_query_risk": 0.0
+      }
+    ],
+    "noul_diagnostics": {
+      "brier": 0.0836,
+      "ece10": 0.1688,
+      "reliability": [
+        {
+          "bin": 0.05,
+          "mean_confidence": 0.0765,
+          "empirical_frequency": 0.0,
+          "count": 34
+        },
+        {
+          "bin": 0.15,
+          "mean_confidence": 0.1438,
+          "empirical_frequency": 0.3333,
+          "count": 24
+        },
+        {
+          "bin": 0.25,
+          "mean_confidence": 0.2485,
+          "empirical_frequency": 0.8462,
+          "count": 13
+        },
+        {
+          "bin": 0.35,
+          "mean_confidence": 0.3336,
+          "empirical_frequency": 0.9286,
+          "count": 14
+        },
+        {
+          "bin": 0.45,
+          "mean_confidence": 0.4406,
+          "empirical_frequency": 0.9375,
+          "count": 16
+        },
+        {
+          "bin": 0.55,
+          "mean_confidence": 0.536,
+          "empirical_frequency": 0.9,
+          "count": 20
+        },
+        {
+          "bin": 0.65,
+          "mean_confidence": 0.6479,
+          "empirical_frequency": 0.931,
+          "count": 29
+        },
+        {
+          "bin": 0.75,
+          "mean_confidence": 0.7511,
+          "empirical_frequency": 1.0,
+          "count": 38
+        },
+        {
+          "bin": 0.85,
+          "mean_confidence": 0.8498,
+          "empirical_frequency": 0.9886,
+          "count": 88
+        },
+        {
+          "bin": 0.95,
+          "mean_confidence": 0.9442,
+          "empirical_frequency": 0.9946,
+          "count": 184
+        }
+      ]
+    },
+    "routing_probability_diagnostics": {
+      "brier": 0.1061,
+      "ece10": 0.0994,
+      "reliability": [
+        {
+          "bin": 0.15,
+          "mean_confidence": 0.1609,
+          "empirical_frequency": 0.0,
+          "count": 2
+        },
+        {
+          "bin": 0.25,
+          "mean_confidence": 0.2714,
+          "empirical_frequency": 0.0,
+          "count": 6
+        },
+        {
+          "bin": 0.35,
+          "mean_confidence": 0.3603,
+          "empirical_frequency": 0.1429,
+          "count": 7
+        },
+        {
+          "bin": 0.45,
+          "mean_confidence": 0.4665,
+          "empirical_frequency": 0.3125,
+          "count": 16
+        },
+        {
+          "bin": 0.55,
+          "mean_confidence": 0.5502,
+          "empirical_frequency": 0.3478,
+          "count": 23
+        },
+        {
+          "bin": 0.65,
+          "mean_confidence": 0.6438,
+          "empirical_frequency": 0.1667,
+          "count": 18
+        },
+        {
+          "bin": 0.75,
+          "mean_confidence": 0.7541,
+          "empirical_frequency": 0.3158,
+          "count": 19
+        },
+        {
+          "bin": 0.85,
+          "mean_confidence": 0.8459,
+          "empirical_frequency": 0.6429,
+          "count": 28
+        },
+        {
+          "bin": 0.95,
+          "mean_confidence": 0.9898,
+          "empirical_frequency": 0.9531,
+          "count": 341
+        }
+      ]
+    }
+  },
+  "audit": {
+    "pool_n": 550,
+    "threshold": 0.831,
+    "routed_share": 0.8691,
+    "true_routed_correct": 0.8509,
+    "budgets": [
+      {
+        "n_pool": 550,
+        "n_labeled": 25,
+        "repeats": 500,
+        "truth_pool_mean": 0.85091,
+        "conf": 0.95,
+        "methods": {
+          "classical": {
+            "ci_coverage": 0.894,
+            "mean_width": 0.26956,
+            "mean_estimate": 0.8528,
+            "bias": 0.00189
+          },
+          "imputation": {
+            "ci_coverage": 1.0,
+            "mean_width": 0.05726,
+            "mean_estimate": 0.85844,
+            "bias": 0.00753
+          },
+          "ppi": {
+            "ci_coverage": 0.966,
+            "mean_width": 0.1017,
+            "mean_estimate": 0.85368,
+            "bias": 0.00277
+          }
+        },
+        "ppi_width_reduction_vs_classical": 0.6227,
+        "labels_ratio_classical_over_ppi": 7.025
+      },
+      {
+        "n_pool": 550,
+        "n_labeled": 50,
+        "repeats": 500,
+        "truth_pool_mean": 0.85091,
+        "conf": 0.95,
+        "methods": {
+          "classical": {
+            "ci_coverage": 0.944,
+            "mean_width": 0.19308,
+            "mean_estimate": 0.85452,
+            "bias": 0.00361
+          },
+          "imputation": {
+            "ci_coverage": 1.0,
+            "mean_width": 0.05871,
+            "mean_estimate": 0.85822,
+            "bias": 0.00731
+          },
+          "ppi": {
+            "ci_coverage": 0.996,
+            "mean_width": 0.08804,
+            "mean_estimate": 0.85111,
+            "bias": 0.0002
+          }
+        },
+        "ppi_width_reduction_vs_classical": 0.544,
+        "labels_ratio_classical_over_ppi": 4.81
+      },
+      {
+        "n_pool": 550,
+        "n_labeled": 100,
+        "repeats": 500,
+        "truth_pool_mean": 0.85091,
+        "conf": 0.95,
+        "methods": {
+          "classical": {
+            "ci_coverage": 0.946,
+            "mean_width": 0.13969,
+            "mean_estimate": 0.8494,
+            "bias": -0.00151
+          },
+          "imputation": {
+            "ci_coverage": 0.998,
+            "mean_width": 0.06177,
+            "mean_estimate": 0.85877,
+            "bias": 0.00786
+          },
+          "ppi": {
+            "ci_coverage": 0.994,
+            "mean_width": 0.07924,
+            "mean_estimate": 0.85066,
+            "bias": -0.00025
+          }
+        },
+        "ppi_width_reduction_vs_classical": 0.4327,
+        "labels_ratio_classical_over_ppi": 3.108
+      },
+      {
+        "n_pool": 550,
+        "n_labeled": 200,
+        "repeats": 500,
+        "truth_pool_mean": 0.85091,
+        "conf": 0.95,
+        "methods": {
+          "classical": {
+            "ci_coverage": 0.988,
+            "mean_width": 0.09922,
+            "mean_estimate": 0.84887,
+            "bias": -0.00204
+          },
+          "imputation": {
+            "ci_coverage": 0.986,
+            "mean_width": 0.06983,
+            "mean_estimate": 0.85953,
+            "bias": 0.00862
+          },
+          "ppi": {
+            "ci_coverage": 0.998,
+            "mean_width": 0.07806,
+            "mean_estimate": 0.8516,
+            "bias": 0.00069
+          }
+        },
+        "ppi_width_reduction_vs_classical": 0.2133,
+        "labels_ratio_classical_over_ppi": 1.616
+      }
+    ],
+    "planning": {
+      "half_width_0.05": {
+        "lambda": 0.9969715405579728,
+        "classical_labels": 253.5,
+        "ppi_labels": 39.7,
+        "pool_term_contribution": 0.00020232,
+        "target_half_width": 0.05
+      },
+      "half_width_0.02": {
+        "lambda": 0.9969715405579728,
+        "classical_labels": Infinity,
+        "ppi_labels": Infinity,
+        "pool_term_contribution": 0.00020232,
+        "target_half_width": 0.02
+      },
+      "half_width_0.01": {
+        "lambda": 0.9969715405579728,
+        "classical_labels": Infinity,
+        "ppi_labels": Infinity,
+        "pool_term_contribution": 0.00020232,
+        "target_half_width": 0.01
+      }
+    },
+    "planning_note": "labels needed to reach a given 95% interval half-width. Infinite means no amount of hand labelling gets there: the term lambda^2 Var(f)/N is set by how much traffic the policy has served, so the pool has to grow, not the labelling budget."
+  },
+  "drift": {
+    "alpha": 0.05,
+    "sections": {
+      "evaluation_exchangeable": {
+        "n": 400,
+        "intent_accuracy": 0.93,
+        "routing_above_threshold": {
+          "n": 400,
+          "routed": 339,
+          "routed_correct": 330,
+          "routed_wrong": 9,
+          "abstained": 61,
+          "coverage": 0.8475,
+          "selective_error": 0.0265,
+          "selective_error_wilson95": [
+            0.014,
+            0.0497
+          ],
+          "selective_error_cp_ucb95": 0.0459,
+          "per_query_risk": 0.0225,
+          "per_query_risk_wilson95": [
+            0.0119,
+            0.0422
+          ]
+        },
+        "certificate_held": true,
+        "gate_false_accept_rate_per_query": 0.0,
+        "gate_false_accept_rate_among_accepted": 0.0,
+        "gate_certificate_held": true
+      },
+      "in_taxonomy_exchangeable": {
+        "n": 150,
+        "intent_accuracy": 0.9533,
+        "routing_above_threshold": {
+          "n": 150,
+          "routed": 139,
+          "routed_correct": 138,
+          "routed_wrong": 1,
+          "abstained": 11,
+          "coverage": 0.9267,
+          "selective_error": 0.0072,
+          "selective_error_wilson95": [
+            0.0013,
+            0.0396
+          ],
+          "selective_error_cp_ucb95": 0.0337,
+          "per_query_risk": 0.0067,
+          "per_query_risk_wilson95": [
+            0.0012,
+            0.0368
+          ]
+        },
+        "certificate_held": true,
+        "gate_false_accept_rate_per_query": 0.0,
+        "gate_false_accept_rate_among_accepted": 0.0,
+        "gate_certificate_held": true
+      },
+      "out_of_scope_traffic": {
+        "n": 300,
+        "intent_accuracy": 0.0,
+        "routing_above_threshold": {
+          "n": 300,
+          "routed": 69,
+          "routed_correct": 0,
+          "routed_wrong": 69,
+          "abstained": 231,
+          "coverage": 0.23,
+          "selective_error": 1.0,
+          "selective_error_wilson95": [
+            0.9473,
+            1.0
+          ],
+          "selective_error_cp_ucb95": 1.0,
+          "per_query_risk": 0.23,
+          "per_query_risk_wilson95": [
+            0.186,
+            0.2809
+          ]
+        },
+        "certificate_held": false,
+        "gate_false_accept_rate_per_query": 0.3867,
+        "gate_false_accept_rate_among_accepted": 1.0,
+        "gate_certificate_held": false
+      }
+    }
+  },
+  "examples": {
+    "confident_correct": [
+      {
+        "text": "can you tell me why my card got declined",
+        "gold": "card_declined",
+        "choice": "card_declined",
+        "p": 1.0
+      },
+      {
+        "text": "what's the exhange rate between mxn and gbp",
+        "gold": "exchange_rate",
+        "choice": "exchange_rate",
+        "p": 1.0
+      },
+      {
+        "text": "i want to freeze my bank account",
+        "gold": "freeze_account",
+        "choice": "freeze_account",
+        "p": 1.0
+      },
+      {
+        "text": "i would like to know the timezone for britain",
+        "gold": "timezone",
+        "choice": "timezone",
+        "p": 1.0
+      },
+      {
+        "text": "what should i do if i need to report my card lost",
+        "gold": "report_lost_card",
+        "choice": "report_lost_card",
+        "p": 1.0
+      }
+    ],
+    "confident_wrong": [
+      {
+        "text": "what will tomorrow be on the calendar",
+        "gold": "date",
+        "choice": "calendar",
+        "p": 1.0,
+        "runner_up": [
+          [
+            "accept_reservations",
+            0.0
+          ]
+        ]
+      },
+      {
+        "text": "did someone who is unauthorized try to get into my bank account",
+        "gold": "account_blocked",
+        "choice": "report_fraud",
+        "p": 0.99,
+        "runner_up": [
+          [
+            "account_blocked",
+            0.01
+          ]
+        ]
+      },
+      {
+        "text": "i don't want to forget to call mom",
+        "gold": "reminder_update",
+        "choice": "reminder",
+        "p": 0.97,
+        "runner_up": [
+          [
+            "todo_list",
+            0.02
+          ]
+        ]
+      },
+      {
+        "text": "hush",
+        "gold": "cancel",
+        "choice": "whisper_mode",
+        "p": 0.96,
+        "runner_up": [
+          [
+            "change_volume",
+            0.03
+          ]
+        ]
+      },
+      {
+        "text": "can i hurt my credit rating if i open several credit cards in a short time frame",
+        "gold": "improve_credit_score",
+        "choice": "credit_score",
+        "p": 0.92,
+        "runner_up": [
+          [
+            "improve_credit_score",
+            0.06
+          ]
+        ]
+      }
+    ]
+  },
+  "restricted_deployment": {
+    "deployed_intents": 20,
+    "routing": {
+      "calibration_n": 400,
+      "evaluation_n": 200,
+      "calibration_accuracy_in_scope": 0.985,
+      "calibration_accuracy_as_mixed": 0.985,
+      "top1_accuracy": 0.965,
+      "certificates": [
+        {
+          "alpha": 0.05,
+          "feasible": true,
+          "threshold": 0.0,
+          "certified_per_query_loss": 0.0175,
+          "calibration_per_query_loss": 0.015,
+          "calibration_n": 400,
+          "min_attainable_bound": 0.0025,
+          "note": "",
+          "measured_on_holdout": {
+            "n": 200,
+            "routed": 200,
+            "routed_correct": 193,
+            "routed_wrong": 7,
+            "abstained": 0,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "selective_error_wilson95": [
+              0.0171,
+              0.0705
+            ],
+            "selective_error_cp_ucb95": 0.0647,
+            "per_query_risk": 0.035,
+            "per_query_risk_wilson95": [
+              0.0171,
+              0.0705
+            ]
+          },
+          "certificate_held": true,
+          "coverage": 1.0
+        }
+      ],
+      "curves": {
+        "in_scope_only": [
+          {
+            "threshold": 0.0,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.01,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.02,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.03,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.04,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.05,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.06,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.07,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.08,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.09,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.1,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.11,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.12,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.13,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.14,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.15,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.16,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.17,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.18,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.19,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.2,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.21,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.22,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.23,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.24,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.25,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.26,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.27,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.28,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.29,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.3,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.31,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.32,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.33,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.34,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.35,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.36,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.37,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.38,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.39,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.4,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.41,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.42,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.43,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.44,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.45,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.46,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.47,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.48,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.49,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.5,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.51,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.52,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.53,
+            "coverage": 0.995,
+            "selective_error": 0.035176,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.54,
+            "coverage": 0.995,
+            "selective_error": 0.035176,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.55,
+            "coverage": 0.995,
+            "selective_error": 0.035176,
+            "per_query_risk": 0.035
+          },
+          {
+            "threshold": 0.56,
+            "coverage": 0.99,
+            "selective_error": 0.030303,
+            "per_query_risk": 0.03
+          },
+          {
+            "threshold": 0.57,
+            "coverage": 0.985,
+            "selective_error": 0.025381,
+            "per_query_risk": 0.025
+          },
+          {
+            "threshold": 0.58,
+            "coverage": 0.985,
+            "selective_error": 0.025381,
+            "per_query_risk": 0.025
+          },
+          {
+            "threshold": 0.59,
+            "coverage": 0.985,
+            "selective_error": 0.025381,
+            "per_query_risk": 0.025
+          },
+          {
+            "threshold": 0.6,
+            "coverage": 0.985,
+            "selective_error": 0.025381,
+            "per_query_risk": 0.025
+          },
+          {
+            "threshold": 0.61,
+            "coverage": 0.985,
+            "selective_error": 0.025381,
+            "per_query_risk": 0.025
+          },
+          {
+            "threshold": 0.62,
+            "coverage": 0.985,
+            "selective_error": 0.025381,
+            "per_query_risk": 0.025
+          },
+          {
+            "threshold": 0.63,
+            "coverage": 0.985,
+            "selective_error": 0.025381,
+            "per_query_risk": 0.025
+          },
+          {
+            "threshold": 0.64,
+            "coverage": 0.985,
+            "selective_error": 0.025381,
+            "per_query_risk": 0.025
+          },
+          {
+            "threshold": 0.65,
+            "coverage": 0.985,
+            "selective_error": 0.025381,
+            "per_query_risk": 0.025
+          },
+          {
+            "threshold": 0.66,
+            "coverage": 0.985,
+            "selective_error": 0.025381,
+            "per_query_risk": 0.025
+          },
+          {
+            "threshold": 0.67,
+            "coverage": 0.98,
+            "selective_error": 0.02551,
+            "per_query_risk": 0.025
+          },
+          {
+            "threshold": 0.68,
+            "coverage": 0.98,
+            "selective_error": 0.02551,
+            "per_query_risk": 0.025
+          },
+          {
+            "threshold": 0.69,
+            "coverage": 0.975,
+            "selective_error": 0.025641,
+            "per_query_risk": 0.025
+          },
+          {
+            "threshold": 0.7,
+            "coverage": 0.97,
+            "selective_error": 0.025773,
+            "per_query_risk": 0.025
+          },
+          {
+            "threshold": 0.71,
+            "coverage": 0.97,
+            "selective_error": 0.025773,
+            "per_query_risk": 0.025
+          },
+          {
+            "threshold": 0.72,
+            "coverage": 0.97,
+            "selective_error": 0.025773,
+            "per_query_risk": 0.025
+          },
+          {
+            "threshold": 0.73,
+            "coverage": 0.97,
+            "selective_error": 0.025773,
+            "per_query_risk": 0.025
+          },
+          {
+            "threshold": 0.74,
+            "coverage": 0.97,
+            "selective_error": 0.025773,
+            "per_query_risk": 0.025
+          },
+          {
+            "threshold": 0.75,
+            "coverage": 0.96,
+            "selective_error": 0.026042,
+            "per_query_risk": 0.025
+          },
+          {
+            "threshold": 0.76,
+            "coverage": 0.96,
+            "selective_error": 0.026042,
+            "per_query_risk": 0.025
+          },
+          {
+            "threshold": 0.77,
+            "coverage": 0.96,
+            "selective_error": 0.026042,
+            "per_query_risk": 0.025
+          },
+          {
+            "threshold": 0.78,
+            "coverage": 0.955,
+            "selective_error": 0.020942,
+            "per_query_risk": 0.02
+          },
+          {
+            "threshold": 0.79,
+            "coverage": 0.945,
+            "selective_error": 0.021164,
+            "per_query_risk": 0.02
+          },
+          {
+            "threshold": 0.8,
+            "coverage": 0.94,
+            "selective_error": 0.021277,
+            "per_query_risk": 0.02
+          },
+          {
+            "threshold": 0.81,
+            "coverage": 0.935,
+            "selective_error": 0.016043,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.82,
+            "coverage": 0.935,
+            "selective_error": 0.016043,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.83,
+            "coverage": 0.93,
+            "selective_error": 0.016129,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.84,
+            "coverage": 0.925,
+            "selective_error": 0.016216,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.85,
+            "coverage": 0.92,
+            "selective_error": 0.016304,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.86,
+            "coverage": 0.92,
+            "selective_error": 0.016304,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.87,
+            "coverage": 0.92,
+            "selective_error": 0.016304,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.88,
+            "coverage": 0.92,
+            "selective_error": 0.016304,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.89,
+            "coverage": 0.915,
+            "selective_error": 0.016393,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.9,
+            "coverage": 0.915,
+            "selective_error": 0.016393,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.91,
+            "coverage": 0.915,
+            "selective_error": 0.016393,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.92,
+            "coverage": 0.905,
+            "selective_error": 0.01105,
+            "per_query_risk": 0.01
+          },
+          {
+            "threshold": 0.93,
+            "coverage": 0.89,
+            "selective_error": 0.005618,
+            "per_query_risk": 0.005
+          },
+          {
+            "threshold": 0.94,
+            "coverage": 0.88,
+            "selective_error": 0.005682,
+            "per_query_risk": 0.005
+          },
+          {
+            "threshold": 0.95,
+            "coverage": 0.875,
+            "selective_error": 0.005714,
+            "per_query_risk": 0.005
+          },
+          {
+            "threshold": 0.96,
+            "coverage": 0.86,
+            "selective_error": 0.005814,
+            "per_query_risk": 0.005
+          },
+          {
+            "threshold": 0.97,
+            "coverage": 0.855,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          },
+          {
+            "threshold": 0.98,
+            "coverage": 0.84,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          },
+          {
+            "threshold": 0.99,
+            "coverage": 0.825,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          },
+          {
+            "threshold": 1.0,
+            "coverage": 0.8,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          }
+        ],
+        "calibration": [
+          {
+            "threshold": 0.0,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.01,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.02,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.03,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.04,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.05,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.06,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.07,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.08,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.09,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.1,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.11,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.12,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.13,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.14,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.15,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.16,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.17,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.18,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.19,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.2,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.21,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.22,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.23,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.24,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.25,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.26,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.27,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.28,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.29,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.3,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.31,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.32,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.33,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.34,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.35,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.36,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.37,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.38,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.39,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.4,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.41,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.42,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.43,
+            "coverage": 1.0,
+            "selective_error": 0.015,
+            "per_query_risk": 0.015
+          },
+          {
+            "threshold": 0.44,
+            "coverage": 0.9975,
+            "selective_error": 0.012531,
+            "per_query_risk": 0.0125
+          },
+          {
+            "threshold": 0.45,
+            "coverage": 0.9975,
+            "selective_error": 0.012531,
+            "per_query_risk": 0.0125
+          },
+          {
+            "threshold": 0.46,
+            "coverage": 0.995,
+            "selective_error": 0.012563,
+            "per_query_risk": 0.0125
+          },
+          {
+            "threshold": 0.47,
+            "coverage": 0.995,
+            "selective_error": 0.012563,
+            "per_query_risk": 0.0125
+          },
+          {
+            "threshold": 0.48,
+            "coverage": 0.995,
+            "selective_error": 0.012563,
+            "per_query_risk": 0.0125
+          },
+          {
+            "threshold": 0.49,
+            "coverage": 0.995,
+            "selective_error": 0.012563,
+            "per_query_risk": 0.0125
+          },
+          {
+            "threshold": 0.5,
+            "coverage": 0.995,
+            "selective_error": 0.012563,
+            "per_query_risk": 0.0125
+          },
+          {
+            "threshold": 0.51,
+            "coverage": 0.995,
+            "selective_error": 0.012563,
+            "per_query_risk": 0.0125
+          },
+          {
+            "threshold": 0.52,
+            "coverage": 0.9875,
+            "selective_error": 0.012658,
+            "per_query_risk": 0.0125
+          },
+          {
+            "threshold": 0.53,
+            "coverage": 0.9875,
+            "selective_error": 0.012658,
+            "per_query_risk": 0.0125
+          },
+          {
+            "threshold": 0.54,
+            "coverage": 0.985,
+            "selective_error": 0.010152,
+            "per_query_risk": 0.01
+          },
+          {
+            "threshold": 0.55,
+            "coverage": 0.9825,
+            "selective_error": 0.010178,
+            "per_query_risk": 0.01
+          },
+          {
+            "threshold": 0.56,
+            "coverage": 0.9825,
+            "selective_error": 0.010178,
+            "per_query_risk": 0.01
+          },
+          {
+            "threshold": 0.57,
+            "coverage": 0.9825,
+            "selective_error": 0.010178,
+            "per_query_risk": 0.01
+          },
+          {
+            "threshold": 0.58,
+            "coverage": 0.9775,
+            "selective_error": 0.007673,
+            "per_query_risk": 0.0075
+          },
+          {
+            "threshold": 0.59,
+            "coverage": 0.9775,
+            "selective_error": 0.007673,
+            "per_query_risk": 0.0075
+          },
+          {
+            "threshold": 0.6,
+            "coverage": 0.9725,
+            "selective_error": 0.007712,
+            "per_query_risk": 0.0075
+          },
+          {
+            "threshold": 0.61,
+            "coverage": 0.9725,
+            "selective_error": 0.007712,
+            "per_query_risk": 0.0075
+          },
+          {
+            "threshold": 0.62,
+            "coverage": 0.9725,
+            "selective_error": 0.007712,
+            "per_query_risk": 0.0075
+          },
+          {
+            "threshold": 0.63,
+            "coverage": 0.97,
+            "selective_error": 0.007732,
+            "per_query_risk": 0.0075
+          },
+          {
+            "threshold": 0.64,
+            "coverage": 0.97,
+            "selective_error": 0.007732,
+            "per_query_risk": 0.0075
+          },
+          {
+            "threshold": 0.65,
+            "coverage": 0.97,
+            "selective_error": 0.007732,
+            "per_query_risk": 0.0075
+          },
+          {
+            "threshold": 0.66,
+            "coverage": 0.97,
+            "selective_error": 0.007732,
+            "per_query_risk": 0.0075
+          },
+          {
+            "threshold": 0.67,
+            "coverage": 0.9675,
+            "selective_error": 0.007752,
+            "per_query_risk": 0.0075
+          },
+          {
+            "threshold": 0.68,
+            "coverage": 0.965,
+            "selective_error": 0.007772,
+            "per_query_risk": 0.0075
+          },
+          {
+            "threshold": 0.69,
+            "coverage": 0.9575,
+            "selective_error": 0.002611,
+            "per_query_risk": 0.0025
+          },
+          {
+            "threshold": 0.7,
+            "coverage": 0.9575,
+            "selective_error": 0.002611,
+            "per_query_risk": 0.0025
+          },
+          {
+            "threshold": 0.71,
+            "coverage": 0.9575,
+            "selective_error": 0.002611,
+            "per_query_risk": 0.0025
+          },
+          {
+            "threshold": 0.72,
+            "coverage": 0.9525,
+            "selective_error": 0.002625,
+            "per_query_risk": 0.0025
+          },
+          {
+            "threshold": 0.73,
+            "coverage": 0.9525,
+            "selective_error": 0.002625,
+            "per_query_risk": 0.0025
+          },
+          {
+            "threshold": 0.74,
+            "coverage": 0.9475,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          },
+          {
+            "threshold": 0.75,
+            "coverage": 0.9475,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          },
+          {
+            "threshold": 0.76,
+            "coverage": 0.945,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          },
+          {
+            "threshold": 0.77,
+            "coverage": 0.94,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          },
+          {
+            "threshold": 0.78,
+            "coverage": 0.94,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          },
+          {
+            "threshold": 0.79,
+            "coverage": 0.9375,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          },
+          {
+            "threshold": 0.8,
+            "coverage": 0.9375,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          },
+          {
+            "threshold": 0.81,
+            "coverage": 0.935,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          },
+          {
+            "threshold": 0.82,
+            "coverage": 0.93,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          },
+          {
+            "threshold": 0.83,
+            "coverage": 0.9275,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          },
+          {
+            "threshold": 0.84,
+            "coverage": 0.9275,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          },
+          {
+            "threshold": 0.85,
+            "coverage": 0.9225,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          },
+          {
+            "threshold": 0.86,
+            "coverage": 0.9175,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          },
+          {
+            "threshold": 0.87,
+            "coverage": 0.9125,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          },
+          {
+            "threshold": 0.88,
+            "coverage": 0.9125,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          },
+          {
+            "threshold": 0.89,
+            "coverage": 0.91,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          },
+          {
+            "threshold": 0.9,
+            "coverage": 0.9075,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          },
+          {
+            "threshold": 0.91,
+            "coverage": 0.9075,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          },
+          {
+            "threshold": 0.92,
+            "coverage": 0.9075,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          },
+          {
+            "threshold": 0.93,
+            "coverage": 0.9025,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          },
+          {
+            "threshold": 0.94,
+            "coverage": 0.8875,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          },
+          {
+            "threshold": 0.95,
+            "coverage": 0.8775,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          },
+          {
+            "threshold": 0.96,
+            "coverage": 0.8675,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          },
+          {
+            "threshold": 0.97,
+            "coverage": 0.8625,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          },
+          {
+            "threshold": 0.98,
+            "coverage": 0.85,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          },
+          {
+            "threshold": 0.99,
+            "coverage": 0.8225,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          },
+          {
+            "threshold": 1.0,
+            "coverage": 0.7775,
+            "selective_error": 0.0,
+            "per_query_risk": 0.0
+          }
+        ]
+      }
+    },
+    "gate": {
+      "calibration_n": 400,
+      "evaluation_n": 200,
+      "certificates": [],
+      "sample_answers": [
+        {
+          "text": "stop talking you are annoying",
+          "gold": "cancel",
+          "in_scope_probability": 0.09
+        },
+        {
+          "text": "stop processing",
+          "gold": "cancel",
+          "in_scope_probability": 0.11
+        },
+        {
+          "text": "you can stop talking ai",
+          "gold": "cancel",
+          "in_scope_probability": 0.11
+        },
+        {
+          "text": "just stop talking",
+          "gold": "cancel",
+          "in_scope_probability": 0.12
+        },
+        {
+          "text": "how expensive is my internet",
+          "gold": "bill_balance",
+          "in_scope_probability": 0.27
+        },
+        {
+          "text": "whens my insurance due and how much does it cost",
+          "gold": "bill_balance",
+          "in_scope_probability": 0.27
+        }
+      ],
+      "note": "the calibration mix contains a single class, so no gate threshold can be fitted. A scope gate needs examples of traffic the deployed taxonomy does not cover -- this is a real deployment hazard, not a limitation of the method."
+    },
+    "drift": {
+      "alpha": 0.05,
+      "sections": {
+        "in_taxonomy_exchangeable": {
+          "n": 200,
+          "intent_accuracy": 0.965,
+          "routing_above_threshold": {
+            "n": 200,
+            "routed": 200,
+            "routed_correct": 193,
+            "routed_wrong": 7,
+            "abstained": 0,
+            "coverage": 1.0,
+            "selective_error": 0.035,
+            "selective_error_wilson95": [
+              0.0171,
+              0.0705
+            ],
+            "selective_error_cp_ucb95": 0.0647,
+            "per_query_risk": 0.035,
+            "per_query_risk_wilson95": [
+              0.0171,
+              0.0705
+            ]
+          },
+          "certificate_held": true,
+          "gate_false_accept_rate_per_query": 0.0,
+          "gate_false_accept_rate_among_accepted": 0.0,
+          "gate_certificate_held": true
+        },
+        "unlisted_intents_traffic": {
+          "n": 500,
+          "intent_accuracy": 0.0,
+          "routing_above_threshold": {
+            "n": 500,
+            "routed": 500,
+            "routed_correct": 0,
+            "routed_wrong": 500,
+            "abstained": 0,
+            "coverage": 1.0,
+            "selective_error": 1.0,
+            "selective_error_wilson95": [
+              0.9924,
+              1.0
+            ],
+            "selective_error_cp_ucb95": 1.0,
+            "per_query_risk": 1.0,
+            "per_query_risk_wilson95": [
+              0.9924,
+              1.0
+            ]
+          },
+          "certificate_held": false,
+          "gate_false_accept_rate_per_query": 0.0,
+          "gate_false_accept_rate_among_accepted": 0.0,
+          "gate_certificate_held": true
+        }
+      }
+    },
+    "note": "Same model, same procedure, same threshold-fitting code -- only the traffic distribution changes. This is the section that shows what the certificate does and does not cover."
+  }
+}

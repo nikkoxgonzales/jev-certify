@@ -1,0 +1,38 @@
+deployed intents: full=150 restricted=20
+planned decisions: 2410
+journal already holds 1311 decisions; new calls will pay only for misses
+[pass 1][full/calibration] 460 decisions
+  1/460 decisions  (0s)
+  460/460 decisions  (0s)
+[pass 1][full/evaluation] 400 decisions
+  400/400 decisions  (0s)
+[pass 1][full/oos_evaluation] 300 decisions
+  300/300 decisions  (0s)
+[pass 1][full/in_taxonomy_evaluation] 150 decisions
+  150/150 decisions  (1s)
+[pass 1][restricted/calibration] 400 decisions
+  105/400 decisions  (6s)
+  220/400 decisions  (11s)
+  337/400 decisions  (16s)
+  400/400 decisions  (19s)
+[pass 1][restricted/shift_evaluation] 500 decisions
+  115/500 decisions  (24s)
+  233/500 decisions  (29s)
+  346/500 decisions  (34s)
+  454/500 decisions  (39s)
+  500/500 decisions  (41s)
+[pass 1][restricted/in_taxonomy_evaluation] 200 decisions
+  115/200 decisions  (46s)
+  200/200 decisions  (50s)
+{
+  "api_calls": 1101,
+  "journal_hits": 1309,
+  "cost_usd": 0.038716,
+  "input_tokens": 921807,
+  "output_tokens": 223851,
+  "latency_p50_s": 0.344,
+  "latency_p95_s": 0.4401,
+  "journal_entries": 2412,
+  "journal_total_cost_usd": 0.229461
+}
+journal: C:\Users\nikko\Desktop\cc\jev-projects\jev-certify\results\journal.jsonl

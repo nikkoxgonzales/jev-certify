@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.pytest-tmp/
+.venv/
+venv/
+.env
+
+# The full journal also keeps the request payloads (15.9 MB). The committed
+# results/journal.jsonl is the slim form and proves the same thing, because every
+# request is rebuilt from the plan files and hash-checked against the journal key.
+results/journal.full.jsonl
+
+# CLINC150 is a research-use dataset: fetch it with experiments/collect.py rather than
+# vendoring it here. The committed plan files record the exact queries this run used.
+data/
